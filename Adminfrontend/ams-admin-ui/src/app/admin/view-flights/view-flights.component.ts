@@ -38,22 +38,25 @@ export class ViewFlightsComponent implements OnInit {
     this.loadFlights();
   }
 
-  loadFlights(){
+loadFlights() {
 
-    this.service.getAllFlights()
-      .subscribe({
+  this.service.getAllFlights()
+    .subscribe({
 
-        next: (data:any) => {
+      next: (data: any) => {
 
-          this.flights = data;
-        },
+        this.flights = data.filter(
+          (flight: any) =>
+            flight.status !== 'CANCELLED'
+        );
+      },
 
-        error: () => {
+      error: () => {
 
-          alert('Unable to load flights');
-        }
-      });
-  }
+        alert('Unable to load flights');
+      }
+    });
+}
 
   openDeletePopup(id:number){
 
@@ -66,30 +69,34 @@ export class ViewFlightsComponent implements OnInit {
 
     this.showDeletePopup = false;
   }
+confirmDelete() {
 
-  confirmDelete(){
+  this.service.deleteFlight(this.selectedFlightId)
+    .subscribe({
 
-    this.service.deleteFlight(this.selectedFlightId)
-      .subscribe({
+      next: () => {
 
-        next: () => {
+        this.showDeletePopup = false;
 
-          this.flights =
-            this.flights.filter(
-              flight =>
-                flight.flightId !== this.selectedFlightId
-            );
+        this.loadFlights();
 
-          this.showDeletePopup = false;
+        alert('Flight cancelled successfully');
+      },
 
-          alert('Flight cancelled successfully');
-        },
+      error: (err) => {
 
-        error: () => {
+        console.error(err);
 
-          alert('Unable to delete flight');
+        if (err.error?.message) {
+
+          alert(err.error.message);
+
+        } else {
+
+          alert('Unable to cancel flight');
         }
-      });
-  }
+      }
+    });
+}
 
 }

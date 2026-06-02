@@ -17,116 +17,198 @@
     </div>
 
     <div class="success" *ngIf="successMessage">
-      {{successMessage}}
+      {{ successMessage }}
     </div>
 
-    <!-- ✅ FORM -->
     <form #carrierForm="ngForm" (ngSubmit)="addCarrier(carrierForm)">
 
-      <!-- ✅ Carrier Name -->
+      <!-- Carrier Name -->
       <div class="input-group">
+
         <label>Carrier Name</label>
+
         <input
           type="text"
           placeholder="Enter carrier name"
           [(ngModel)]="carrier.carrierName"
           name="carrierName"
           required
-          maxlength="50"
-        >
+          maxlength="50">
+
       </div>
 
-      <!-- ✅ DISCOUNT SECTION -->
-      <h3 class="section-title">Discount Percentage</h3>
+      <!-- DISCOUNT SECTION -->
+
+      <h3 class="section-title">
+        Discount Percentage
+      </h3>
+
       <hr>
 
       <div class="input-group">
+
         <label>30 Days Advance Booking (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.discount30Days"
           name="discount30Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('discount30Days')">
+
       </div>
 
       <div class="input-group">
+
         <label>60 Days Advance Booking (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.discount60Days"
           name="discount60Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('discount60Days')">
+
       </div>
 
       <div class="input-group">
+
         <label>90 Days Advance Booking (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.discount90Days"
           name="discount90Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('discount90Days')">
+
       </div>
 
       <div class="input-group">
+
         <label>Bulk Booking (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.bulkBookingDiscount"
           name="bulkBookingDiscount"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('bulkBookingDiscount')">
+
       </div>
 
       <div class="input-group">
+
         <label>Silver User (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.silverUserDiscount"
           name="silverUserDiscount"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('silverUserDiscount')">
+
       </div>
 
       <div class="input-group">
+
         <label>Gold User (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.goldUserDiscount"
           name="goldUserDiscount"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('goldUserDiscount')">
+
       </div>
 
       <div class="input-group">
+
         <label>Platinum User (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.platinumUserDiscount"
           name="platinumUserDiscount"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('platinumUserDiscount')">
+
       </div>
 
-      <!-- ✅ REFUND SECTION -->
-      <h3 class="section-title">Refund Percentage</h3>
+      <!-- REFUND SECTION -->
+
+      <h3 class="section-title">
+        Refund Percentage
+      </h3>
+
       <hr>
 
       <div class="input-group">
+
         <label>2 Days Before Travel (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.refund2Days"
           name="refund2Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('refund2Days')">
+
       </div>
 
       <div class="input-group">
+
         <label>10 Days Before Travel (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.refund10Days"
           name="refund10Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('refund10Days')">
+
       </div>
 
       <div class="input-group">
+
         <label>20+ Days Before Travel (%)</label>
-        <input type="number"
+
+        <input
+          type="number"
           [(ngModel)]="carrier.refund20Days"
           name="refund20Days"
-          required min="0" max="100">
+          required
+          min="0"
+          max="100"
+          (input)="validatePercentage('refund20Days')">
+
       </div>
 
-      <!-- ✅ SUBMIT -->
-      <button type="submit" [disabled]="carrierForm.invalid">
+      <button
+        type="submit"
+        [disabled]="carrierForm.invalid">
+
         ✈ Add Carrier
+
       </button>
 
     </form>

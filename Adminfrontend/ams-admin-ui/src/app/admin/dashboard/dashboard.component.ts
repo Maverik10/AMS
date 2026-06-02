@@ -45,22 +45,25 @@ export class DashboardComponent implements OnInit {
     this.loadCarriersCount();
   }
 
-  loadFlightsCount() {
+loadFlightsCount() {
 
-    this.service.getAllFlights()
-      .subscribe({
+  this.service.getAllFlights()
+    .subscribe({
 
-        next: (data: any) => {
+      next: (data: any) => {
 
-          this.flightsCount = data.length;
-        },
+        this.flightsCount = data.filter(
+          (flight: any) =>
+            flight.status === 'UPCOMING'
+        ).length;
+      },
 
-        error: () => {
+      error: () => {
 
-          console.error('Unable to load flights');
-        }
-      });
-  }
+        console.error('Unable to load flights');
+      }
+    });
+}
 
   loadCarriersCount() {
 

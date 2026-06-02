@@ -43,11 +43,11 @@ export class AdminService {
     return this.http.get<number>(`${this.flightApi}/count`);
   }
 
-  deleteFlight(id: number) {
-    return this.http.delete(
-      `${this.flightApi}/${id}`,
-      { responseType: 'text' }
-    );
-  }
+deleteFlight(id: number) {
+  return this.http.put(
+    `${this.flightApi}/cancel/${id}`,
+    {}
+  );
+}
 
 }

@@ -10,6 +10,8 @@ import { AddFlightComponent } from './admin/add-flight/add-flight.component';
 
 import { ViewFlightsComponent } from './admin/view-flights/view-flights.component';
 
+import { authGuard } from './auth.guard';
+
 export const routes: Routes = [
 
   {
@@ -19,21 +21,25 @@ export const routes: Routes = [
 
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [authGuard]
   },
 
   {
     path: 'add-carrier',
-    component: AddCarrierComponent
+    component: AddCarrierComponent,
+    canActivate: [authGuard]
   },
 
   {
     path: 'add-flight',
-    component: AddFlightComponent
+    component: AddFlightComponent,
+    canActivate: [authGuard]
   },
 
   {
     path: 'view-flights',
-    component: ViewFlightsComponent
+    component: ViewFlightsComponent,
+    canActivate: [authGuard]
   }
 ];

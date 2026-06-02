@@ -42,6 +42,7 @@
             <th>Business</th>
             <th>Economy</th>
             <th>Executive</th>
+            <th>Status</th>
             <th>Action</th>
 
           </tr>
@@ -96,11 +97,49 @@
 
             <td>
 
+              <span
+                *ngIf="flight.status === 'UPCOMING'"
+                style="color:#22c55e;font-weight:600;">
+
+                🟢 Active
+
+              </span>
+
+              <span
+                *ngIf="flight.status === 'CANCELLED'"
+                style="color:#ef4444;font-weight:600;">
+
+                🔴 Cancelled
+
+              </span>
+
+              <span
+                *ngIf="flight.status === 'COMPLETED'"
+                style="color:#f59e0b;font-weight:600;">
+
+                🟡 Completed
+
+              </span>
+
+            </td>
+
+            <td>
+
               <button
+                *ngIf="flight.status === 'UPCOMING'"
                 class="cancel-btn"
                 (click)="openDeletePopup(flight.flightId)">
 
                 ❌ Cancel
+
+              </button>
+
+              <button
+                *ngIf="flight.status !== 'UPCOMING'"
+                class="cancel-btn"
+                disabled>
+
+                {{ flight.status }}
 
               </button>
 
