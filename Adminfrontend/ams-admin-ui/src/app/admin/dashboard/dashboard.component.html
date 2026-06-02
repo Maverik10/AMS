@@ -1,0 +1,198 @@
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo-box">
+      <h2>☁ CloudScanner</h2>
+      <p>Admin Control Center</p>
+    </div>
+
+    <a routerLink="/dashboard" class="nav-item">
+      📊 Dashboard
+    </a>
+
+    <a routerLink="/add-carrier" class="nav-item">
+      🏢 Add Carrier
+    </a>
+
+    <a routerLink="/add-flight" class="nav-item">
+      ✈ Add Flight
+    </a>
+
+    <a routerLink="/view-flights" class="nav-item">
+      📋 View Flights
+    </a>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="content">
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+      <div>
+
+        <span class="badge">
+          CONTROL CENTER
+        </span>
+
+        <h1>
+          CloudScanner Operations Hub
+        </h1>
+
+        <p>
+          Real-time airline management and operational monitoring
+        </p>
+
+      </div>
+
+      <!-- PROFILE DROPDOWN -->
+
+      <div class="profile-container">
+
+        <div
+          class="admin-avatar"
+          (click)="toggleProfileMenu()">
+
+          👨‍✈️ Admin ▼
+
+        </div>
+
+        <div
+          class="profile-menu"
+          *ngIf="showProfileMenu">
+
+          <div class="profile-header">
+
+            <div class="profile-pic">
+              👨‍✈️
+            </div>
+
+            <div>
+
+              <h4>Admin</h4>
+
+              <p>
+                CloudScanner Administrator
+              </p>
+
+            </div>
+
+          </div>
+
+          <div
+  class="menu-item"
+  (click)="viewProfile()">
+
+  👤 My Profile
+
+</div>
+
+
+
+<div
+  class="menu-item logout-item"
+  (click)="logout()">
+
+  🚪 Logout
+
+</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <h2>120+</h2>
+        <p>Flights Active</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>15+</h2>
+        <p>Carriers</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>24/7</h2>
+        <p>Monitoring</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>500+</h2>
+        <p>Bookings</p>
+      </div>
+
+    </div>
+
+    <!-- DASHBOARD GRID -->
+
+    <div class="dashboard-grid">
+
+      <!-- SYSTEM STATUS -->
+
+      <div class="panel">
+
+        <h2>
+          System Status
+        </h2>
+
+        <div class="status-row">
+          🟢 Flight Network Active
+        </div>
+
+        <div class="status-row">
+          🟢 Carrier Services Online
+        </div>
+
+        <div class="status-row">
+          🟢 Database Connected
+        </div>
+
+        <div class="status-row">
+          🟢 API Gateway Healthy
+        </div>
+
+      </div>
+
+      <!-- QUICK ACTIONS -->
+
+      <div class="panel">
+
+        <h2>
+          Quick Actions
+        </h2>
+
+        <div class="action-grid">
+
+          <button routerLink="/add-carrier">
+            Add Carrier
+          </button>
+
+          <button routerLink="/add-flight">
+            Add Flight
+          </button>
+
+          <button routerLink="/view-flights">
+            View Flights
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>

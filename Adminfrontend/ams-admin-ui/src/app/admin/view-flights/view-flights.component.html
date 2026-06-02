@@ -1,0 +1,116 @@
+<div class="page">
+
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <div class="table-card">
+
+    <div class="header-section">
+
+      <div>
+
+        <h1>Flight Operations Center</h1>
+
+        <p class="subtitle">
+          Monitor and manage all registered airline routes
+        </p>
+
+      </div>
+
+      <div class="flight-count">
+
+        {{ flights.length }}
+
+        <span>Flights</span>
+
+      </div>
+
+    </div>
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Flight ID</th>
+            <th>Carrier</th>
+            <th>Route</th>
+            <th>Fare</th>
+            <th>Business</th>
+            <th>Economy</th>
+            <th>Executive</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let flight of flights">
+
+            <td>
+              <span class="flight-id">
+                #{{flight.flightId}}
+              </span>
+            </td>
+
+            <td>
+
+              <span class="carrier-badge">
+                {{flight.carrierName}}
+              </span>
+
+            </td>
+
+            <td>
+
+              <div class="route">
+
+                {{flight.origin}}
+
+                <span>✈</span>
+
+                {{flight.destination}}
+
+              </div>
+
+            </td>
+
+            <td>
+
+              ₹ {{flight.airFare}}
+
+            </td>
+
+            <td>
+
+              {{flight.seatCapacityBusiness}}
+
+            </td>
+
+            <td>
+
+              {{flight.seatCapacityEconomy}}
+
+            </td>
+
+            <td>
+
+              {{flight.seatCapacityExecutive}}
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

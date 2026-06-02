@@ -1,0 +1,131 @@
+<div class="page">
+
+  <div class="bg-glow glow-1"></div>
+  <div class="bg-glow glow-2"></div>
+
+  <div class="form-card">
+
+    <div class="header-section">
+      <div class="icon-box">✈</div>
+
+      <div>
+        <h1>Flight Registration</h1>
+        <p class="subtitle">
+          Configure routes, fare details and seat allocations
+        </p>
+      </div>
+    </div>
+
+    <div class="success" *ngIf="successMessage">
+      {{successMessage}}
+    </div>
+
+    <form #flightForm="ngForm" (ngSubmit)="addFlight(flightForm)">
+
+      <div class="section-title">Flight Information</div>
+
+      <select [(ngModel)]="flight.carrierName" name="carrierName" required>
+        <option value="">Select Carrier</option>
+        <option *ngFor="let carrier of carriers" [value]="carrier.carrierName">
+          {{carrier.carrierName}}
+        </option>
+      </select>
+
+      <div class="route-grid">
+
+        <input
+          type="text"
+          placeholder="Origin Airport"
+          [(ngModel)]="flight.origin"
+          name="origin"
+          required
+          minlength="3"
+        >
+
+        <input
+          type="text"
+          placeholder="Destination Airport"
+          [(ngModel)]="flight.destination"
+          name="destination"
+          required
+          minlength="3"
+        >
+
+      </div>
+
+      <div class="date-field">
+        <input
+          type="date"
+          [(ngModel)]="flight.departureDate"
+          name="departureDate"
+          required
+          [attr.min]="today"
+        />
+      </div>
+
+      <div class="section-title">Fare Configuration</div>
+
+      <input
+        type="number"
+        placeholder="Air Fare (₹)"
+        [(ngModel)]="flight.airFare"
+        name="airFare"
+        required
+        min="100"
+        max="200000"
+      >
+
+      <div class="section-title">Seat Allocation</div>
+
+      <div class="seat-grid">
+
+        <div class="seat-card">
+          <span>💼</span>
+          <input
+            type="number"
+            placeholder="Business"
+            [(ngModel)]="flight.seatCapacityBusiness"
+            name="seatCapacityBusiness"
+            required
+            min="1"
+            max="300"
+          >
+        </div>
+
+        <div class="seat-card">
+          <span>🧳</span>
+          <input
+            type="number"
+            placeholder="Economy"
+            [(ngModel)]="flight.seatCapacityEconomy"
+            name="seatCapacityEconomy"
+            required
+            min="1"
+            max="300"
+          >
+        </div>
+
+        <div class="seat-card">
+          <span>👑</span>
+          <input
+            type="number"
+            placeholder="Executive"
+            [(ngModel)]="flight.seatCapacityExecutive"
+            name="seatCapacityExecutive"
+            required
+            min="1"
+            max="300"
+          >
+        </div>
+
+      </div>
+
+      <button type="submit" [disabled]="flightForm.invalid">
+        ✈ Register Flight
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

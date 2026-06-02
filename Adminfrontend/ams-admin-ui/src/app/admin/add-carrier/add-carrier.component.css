@@ -1,0 +1,255 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:host{
+  display:block;
+  min-height:100vh;
+}
+
+.page{
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #020617,
+      #0f172a,
+      #111827
+    );
+}
+
+.bg-glow{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(80px);
+
+  pointer-events:none;
+}
+
+.glow-1{
+
+  width:350px;
+  height:350px;
+
+  background:
+    rgba(254,153,1,.15);
+
+  top:-100px;
+  right:-100px;
+}
+
+.glow-2{
+
+  width:300px;
+  height:300px;
+
+  background:
+    rgba(204,2,0,.12);
+
+  bottom:-80px;
+  left:-80px;
+}
+
+.form-card{
+
+  width:100%;
+  max-width:560px;
+
+  padding:40px;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  backdrop-filter:
+    blur(25px);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 25px 50px rgba(0,0,0,.35);
+
+  position:relative;
+  z-index:2;
+}
+
+.header-section{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+  margin-bottom:30px;
+}
+
+.icon-box{
+
+  width:70px;
+  height:70px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:18px;
+
+  font-size:32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #CC0200,
+      #FE9901
+    );
+}
+
+h1{
+  color:white;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#94a3b8;
+}
+
+.success{
+
+  background:
+    rgba(34,197,94,.15);
+
+  color:#4ade80;
+
+  padding:14px;
+
+  border-radius:12px;
+
+  margin-bottom:20px;
+
+  border:
+    1px solid rgba(74,222,128,.25);
+}
+
+form{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:18px;
+}
+
+.input-group{
+
+  display:flex;
+  flex-direction:column;
+
+  gap:8px;
+}
+
+label{
+
+  color:#cbd5e1;
+
+  font-size:14px;
+
+  font-weight:600;
+}
+
+input{
+
+  height:55px;
+
+  border:none;
+  outline:none;
+
+  border-radius:14px;
+
+  padding:0 18px;
+
+  color:white;
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  transition:.3s;
+}
+
+input:focus{
+
+  border-color:#FE9901;
+
+  box-shadow:
+    0 0 20px rgba(254,153,1,.15);
+}
+
+button{
+
+  height:58px;
+
+  border:none;
+
+  border-radius:14px;
+
+  margin-top:10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #CC0200,
+      #FE9901
+    );
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+button:hover{
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(251,146,60,.30);
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #FE9901;
+}
+
+hr {
+  border: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 10px;
+}

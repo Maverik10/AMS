@@ -1,0 +1,243 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:host{
+  display:block;
+  min-height:100vh;
+}
+
+.page{
+
+  min-height:100vh;
+
+  padding:40px;
+
+  display:flex;
+  justify-content:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #020617,
+      #0f172a,
+      #111827
+    );
+}
+
+.bg-glow{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(100px);
+
+  pointer-events:none;
+}
+
+.glow-1{
+
+  width:400px;
+  height:400px;
+
+  background:
+    rgba(254,153,1,.15);
+
+  top:-120px;
+  right:-120px;
+}
+
+.glow-2{
+
+  width:320px;
+  height:320px;
+
+  background:
+    rgba(204,2,0,.12);
+
+  bottom:-100px;
+  left:-100px;
+}
+
+.table-card{
+
+  width:100%;
+  max-width:1350px;
+
+  padding:35px;
+
+  border-radius:28px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  backdrop-filter:
+    blur(25px);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.35);
+
+  position:relative;
+  z-index:2;
+}
+
+.header-section{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:30px;
+}
+
+h1{
+
+  color:white;
+
+  margin-bottom:8px;
+
+  font-size:2.5rem;
+}
+
+.subtitle{
+  color:#94a3b8;
+}
+
+.flight-count{
+
+  width:90px;
+  height:90px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #CC0200,
+      #FE9901
+    );
+
+  font-size:26px;
+
+  font-weight:700;
+}
+
+.flight-count span{
+
+  font-size:12px;
+
+  font-weight:500;
+}
+
+.table-wrapper{
+  overflow:auto;
+}
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+}
+
+thead{
+
+  background:
+    rgba(255,255,255,.05);
+}
+
+th{
+
+  padding:18px;
+
+  color:#FE9901;
+
+  text-align:left;
+}
+
+td{
+
+  padding:18px;
+
+  border-top:
+    1px solid rgba(255,255,255,.08);
+
+  color:#e5e7eb;
+}
+
+tbody tr{
+
+  transition:.3s;
+}
+
+tbody tr:hover{
+
+  background:
+    rgba(255,255,255,.04);
+}
+
+.flight-id{
+
+  padding:6px 12px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.08);
+}
+
+.carrier-badge{
+
+  padding:6px 12px;
+
+  border-radius:20px;
+
+  background:
+    rgba(254,153,1,.15);
+
+  color:#FE9901;
+}
+
+.route{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.route span{
+  color:#FE9901;
+}
+
+@media(max-width:900px){
+
+  .header-section{
+
+    flex-direction:column;
+
+    gap:20px;
+  }
+
+  .page{
+    padding:20px;
+  }
+}
