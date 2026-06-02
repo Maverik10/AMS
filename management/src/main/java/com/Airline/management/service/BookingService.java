@@ -12,7 +12,6 @@ public interface BookingService {
     List<Booking> getBookingsByPassenger(Long passengerId);
     Booking getBookingById(Long bookingId);
     Booking cancelBooking(Long bookingId);
-    Booking completeBooking(Long bookingId);
 
     List<Booking> getUpcomingBookings(Long passengerId);
     List<Booking> getCancelledBookings(Long passengerId);

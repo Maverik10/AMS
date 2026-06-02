@@ -38,7 +38,11 @@ public class Flight {
     private Integer leftSeatCapacityEconomy;
     private Integer leftSeatCapacityExecutive;
 
-    
+    // Lifecycle: UPCOMING (default) -> COMPLETED (auto, after departureDate) / CANCELLED (admin)
+    @Column(columnDefinition = "varchar(20) default 'UPCOMING'")
+    private String status;
+
+
     @PrePersist
     public void setInitialLeftSeatCapacity() {
         if (this.leftSeatCapacityBusiness == null) {
@@ -51,6 +55,10 @@ public class Flight {
 
         if (this.leftSeatCapacityExecutive == null) {
             this.leftSeatCapacityExecutive = this.seatCapacityExecutive;
+        }
+
+        if (this.status == null) {
+            this.status = "UPCOMING";
         }
     }
 

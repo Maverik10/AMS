@@ -37,11 +37,6 @@ public class FlightController {
         return service.getByCarrierName(name);
     }
 
-    @PutMapping("/{id}")
-    public Flight update(@PathVariable Long id, @RequestBody Flight flight) {
-        return service.updateFlight(id, flight);
-    }
-    
     @GetMapping("/search")
     public List<SearchFlightResponseDto> searchFlights(
             @RequestParam String origin,
@@ -61,12 +56,10 @@ public class FlightController {
 
         return service.getFlightById(flightId);
     }
-    @DeleteMapping("/{flightId}")
-    public String deleteFlight(
+    @PutMapping("/cancel/{flightId}")
+    public Flight cancelFlight(
             @PathVariable Long flightId) {
 
-        service.deleteFlight(flightId);
-
-        return "Flight deleted successfully";
+        return service.cancelFlight(flightId);
     }
 }

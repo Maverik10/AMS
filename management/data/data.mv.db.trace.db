@@ -583,3 +583,72 @@ SELECT COLUMNS FROM FLIGHT [42122-240]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2026-06-03 01:45:35.897582+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:46:14.265237+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:46:56.610623+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:47:13.807741+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:47:39.291616+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:48:31.640356+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:48:45.770618+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:48:59.887092+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:56:25.166977+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:56:43.630001+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 01:56:45.505721+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:08:00.547893+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:20:12.065148+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:20:28.272703+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:20:38.380564+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:21:03.609779+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:21:29.811266+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:21:42.937886+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:27:12.150215+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:27:30.341221+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:27:44.441535+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:28:16.694293+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]
+2026-06-03 02:29:32.309870+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table if exists flight alter column status set data type varchar(20) [*]default 'UPCOMING'"; SQL statement:
+alter table if exists flight alter column status set data type varchar(20) default 'UPCOMING' [42000-240]

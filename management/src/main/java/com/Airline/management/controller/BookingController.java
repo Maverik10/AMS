@@ -70,10 +70,4 @@ public class BookingController {
 
         return bookingService.cancelBooking(bookingId);
     }
-    @PutMapping("/{bookingId}/complete")
-    public Booking completeBooking(
-            @PathVariable Long bookingId) {
-
-        return bookingService.completeBooking(bookingId);
-    }
 }

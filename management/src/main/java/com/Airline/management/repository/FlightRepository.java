@@ -15,4 +15,6 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
             String destination,
             LocalDate departureDate
     );
+
+    List<Flight> findByStatusAndDepartureDateBefore(String status, LocalDate date);
 }
