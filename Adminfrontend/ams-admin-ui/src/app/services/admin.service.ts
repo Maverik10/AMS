@@ -45,7 +45,8 @@ export class AdminService {
 
   deleteFlight(id: number) {
     return this.http.delete(
-      `${this.flightApi}/${id}`
+      `${this.flightApi}/${id}`,
+      { responseType: 'text' }
     );
   }
 

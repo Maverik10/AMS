@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +13,19 @@ import { RouterLink } from '@angular/router';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
   showProfileMenu = false;
 
   greeting = '';
 
-  constructor() {
+  flightsCount = 0;
+
+  carriersCount = 0;
+
+  constructor(
+    private service: AdminService
+  ) {
 
     const hour = new Date().getHours();
 
@@ -31,11 +38,55 @@ export class DashboardComponent {
     }
   }
 
+  ngOnInit(): void {
+
+    this.loadFlightsCount();
+
+    this.loadCarriersCount();
+  }
+
+  loadFlightsCount() {
+
+    this.service.getAllFlights()
+      .subscribe({
+
+        next: (data: any) => {
+
+          this.flightsCount = data.length;
+        },
+
+        error: () => {
+
+          console.error('Unable to load flights');
+        }
+      });
+  }
+
+  loadCarriersCount() {
+
+    this.service.getAllCarriers()
+      .subscribe({
+
+        next: (data: any) => {
+
+          this.carriersCount = data.length;
+        },
+
+        error: () => {
+
+          console.error('Unable to load carriers');
+        }
+      });
+  }
+
   toggleProfileMenu() {
-    this.showProfileMenu = !this.showProfileMenu;
+
+    this.showProfileMenu =
+      !this.showProfileMenu;
   }
 
   viewProfile() {
+
     alert(
       '👨‍✈️ ADMIN PROFILE\n\n' +
       'Name: Admin\n' +
@@ -45,21 +96,19 @@ export class DashboardComponent {
     );
   }
 
+  logout() {
 
-
- logout() {
-
-  const confirmation = confirm(
-    'Are you sure you want to logout?'
-  );
-
-  if (confirmation) {
-
-    localStorage.removeItem(
-      'loggedIn'
+    const confirmation = confirm(
+      'Are you sure you want to logout?'
     );
 
-    window.location.href = '/';
+    if (confirmation) {
+
+      localStorage.removeItem(
+        'loggedIn'
+      );
+
+      window.location.href = '/';
+    }
   }
-}
 }
