@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { BookingService, Booking } from '../services/booking.service';
+import { FlightService } from '../services/flight.service';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-completed-trips',
@@ -13,23 +17,81 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class CompletedTripsComponent implements OnInit {
 
-  trips = [
-    { flightName: 'Vistara UK-911', origin: 'Delhi', destination: 'Bengaluru', travelDate: '2026-01-12', price: 7600 },
-    { flightName: 'Indigo 6E-301', origin: 'Hyderabad', destination: 'Kolkata', travelDate: '2026-02-20', price: 6900 },
-    { flightName: 'Air India AI-808', origin: 'Mumbai', destination: 'Goa', travelDate: '2026-03-11', price: 4300 }
-  ];
+  trips: any[] = [];
 
-  constructor(private router: Router,
-  @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+  private router: Router,
+  private bookingService: BookingService,
+  private flightService: FlightService,
+  @Inject(PLATFORM_ID) private platformId: Object
+) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    // if (isPlatformBrowser(this.platformId)) {
 
-      if (!localStorage.getItem('loggedInUser')) {
-        this.router.navigate(['/login']);
-      }
+    //   if (!localStorage.getItem('loggedInUser')) {
+    //     this.router.navigate(['/login']);
+    //   }
+
+    // }
+    if (!isPlatformBrowser(this.platformId)) {
+    return;
+  }
+
+  const loggedInUser =
+    localStorage.getItem('loggedInUser');
+
+  if (!loggedInUser) {
+    this.router.navigate(['/login']);
+    return;
+  }
+    const passengerId =
+  Number(localStorage.getItem('loggedInUser'));
+
+this.bookingService
+  .getCompletedBookings(passengerId)
+  .subscribe({
+
+    next: (bookings: Booking[]) => {
+
+      const requests =
+        bookings.map(
+          (booking: Booking) =>
+            this.flightService.getFlightById(
+              booking.flightId
+            )
+        );
+
+      forkJoin(requests).subscribe({
+
+        next: (flights: any[]) =>  {
+
+          this.trips =
+            bookings.map(
+              (booking: Booking, index: number) => ({
+
+                ...booking,
+
+                flightName:
+                  flights[index].carrierName,
+
+                origin:
+                  flights[index].origin,
+
+                destination:
+                  flights[index].destination
+
+              })
+            );
+
+        }
+
+      });
 
     }
+
+  });
+    
   }
 
   logout(): void {

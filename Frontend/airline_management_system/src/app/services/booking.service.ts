@@ -30,6 +30,33 @@ export class BookingService {
     );
   }
 
+  getUpcomingBookings(
+    passengerId: number
+  ): Observable<Booking[]> {
+
+    return this.http.get<Booking[]>(
+      `${this.baseUrl}/passenger/${passengerId}/upcoming`
+    );
+  }
+
+  getCompletedBookings(
+    passengerId: number
+  ): Observable<Booking[]> {
+
+    return this.http.get<Booking[]>(
+      `${this.baseUrl}/passenger/${passengerId}/completed`
+    );
+  }
+
+  getCancelledBookings(
+    passengerId: number
+  ): Observable<Booking[]> {
+
+    return this.http.get<Booking[]>(
+      `${this.baseUrl}/passenger/${passengerId}/cancelled`
+    );
+  }
+
   cancelBooking(
   bookingId: number
 ): Observable<Booking> {

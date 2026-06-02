@@ -205,17 +205,43 @@ h1 {
 /* GRID */
 .trip-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 26px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 360px));
+  gap: 22px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.id-section {
+  text-align: right;
+
+  font-size: 0.68rem;
+
+  color: rgba(255,255,255,.55);
+
+  line-height: 1.4;
+}
+
+.booking-count {
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(34,197,94,.15);
+
+  border: 1px solid rgba(34,197,94,.25);
+
+  color: #4ade80;
+
+  font-weight: 700;
 }
 
 /* CARD */
 .trip-card {
   position: relative;
   overflow: hidden;
-  min-height: 390px;
-  padding: 28px;
+  /* min-height: 520px; */
+  /* min-height: 390px; */
+  padding: 22px;
   border-radius: 30px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.115), rgba(255,255,255,.045));
@@ -286,7 +312,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 42px;
+  margin-bottom: 10px;
 }
 
 .trip-status {
@@ -314,7 +340,8 @@ h1 {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 18px;
+  margin-top: 0;
 }
 
 .plane-icon {
@@ -330,7 +357,7 @@ h1 {
 }
 
 .trip-card h3 {
-  font-size: 1.75rem;
+  font-size: 1.45rem;
   color: white;
   margin: 0 0 8px;
   font-weight: 850;
@@ -339,7 +366,7 @@ h1 {
 
 .route {
   color: var(--muted);
-  font-size: 1.03rem;
+  font-size: 0.92rem;
   margin: 0;
 }
 
@@ -353,18 +380,18 @@ h1 {
       rgba(255,255,255,.18),
       transparent
     );
-  margin: 24px 0;
+  margin: 14px 0;
 }
 
 /* INFO */
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 10px;
 }
 
 .info-box {
-  padding: 13px 14px;
+  padding: 10px 12px;
   border-radius: 18px;
   background: rgba(255,255,255,.055);
   border: 1px solid rgba(255,255,255,.09);
@@ -387,8 +414,8 @@ h1 {
 
 /* FOOTER */
 .ticket-footer {
-  margin-top: 22px;
-  padding-top: 18px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid rgba(255,255,255,.10);
   display: flex;
   align-items: center;
@@ -490,9 +517,9 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .trip-card {
+  /* .trip-card {
     min-height: auto;
-  }
+  } */
 
   .info-grid {
     grid-template-columns: 1fr;
@@ -619,3 +646,81 @@ h1 {
   );
   color: white;
 }
+
+.days-left {
+  color: #f59e0b;
+
+  font-size: .9rem;
+
+  font-weight: 600;
+
+  margin-top: 4px;
+}
+
+.card-header {
+  margin-bottom: 8px !important;
+}
+
+.airline-row {
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+}
+
+.trip-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.trip-card {
+  height: auto !important;
+  min-height: unset !important;
+}
+
+.trip-card {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  max-width: 380px;
+
+  padding: 22px;
+
+  align-self: start;
+}
+.trip-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(360px, 380px));
+
+  justify-content: start;
+
+  gap: 22px;
+}
+.airline-row {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.card-header {
+  margin-bottom: 12px;
+}
+
+.ticket-line {
+  margin: 10px 0;
+}
+
+.trip-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(360px, 380px));
+
+  justify-content: start;
+
+  gap: 22px;
+}
+
+.page-header {
+  margin-bottom: 12px;
+}
+

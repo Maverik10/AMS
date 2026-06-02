@@ -431,12 +431,12 @@ h2 {
 .trip-card {
   background: rgba(255,255,255,.04);
   border-radius: 28px;
-  padding: 28px;
+  padding: 20px;
   backdrop-filter: blur(20px);
 
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 10px;
 
   transition: .3s ease;
 }
@@ -467,14 +467,14 @@ h2 {
 }
 
 .trip-card h3 {
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #f3f4f6;
 }
 
 .route {
   color: #b6bdd2;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .trip-meta {
@@ -525,4 +525,94 @@ h2 {
     display: block;
     overflow-x: auto;
   }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.info-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.info-box span {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+}
+
+.info-box strong {
+  color: white;
+  font-size: 1rem;
+}
+
+.airline-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.plane-icon {
+  font-size: 2rem;
+}
+
+.ticket-line {
+  margin: 8px 0;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.flight-id {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.completed-footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #43d17d;
+  font-weight: 600;
+}
+
+.completed-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #43d17d;
+  box-shadow: 0 0 12px #43d17d;
+}
+
+.completed-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #43d17d;
+  box-shadow: 0 0 12px #43d17d;
+}
+
+.id-section {
+  text-align: right;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+}
+
+.trip-grid {
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 }

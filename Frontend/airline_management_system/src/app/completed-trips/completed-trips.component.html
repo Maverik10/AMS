@@ -34,7 +34,7 @@
 
     <div class="trip-grid">
 
-  <div class="trip-card completed-card" *ngFor="let trip of trips">
+  <!-- <div class="trip-card completed-card" *ngFor="let trip of trips">
 
     <span class="trip-status completed">
       Completed
@@ -64,6 +64,73 @@
 
     <div class="trip-footer success">
       Journey Completed
+    </div>
+
+  </div> -->
+
+  <div class="trip-card completed-card" *ngFor="let trip of trips">
+
+    <div class="ticket-glow"></div>
+
+    <div class="card-header">
+
+      <span class="trip-status completed">
+        Completed
+      </span>
+
+      <div class="id-section">
+        <div>Booking #{{ trip.bookingId }}</div>
+        <div>Flight #{{ trip.flightId }}</div>
+      </div>
+
+    </div>
+
+    <div class="airline-row">
+
+      <div class="plane-icon">✈</div>
+
+      <div>
+        <h3>{{ trip.flightName }}</h3>
+
+        <p class="route">
+          {{ trip.origin }} → {{ trip.destination }}
+        </p>
+      </div>
+
+    </div>
+
+    <div class="ticket-line"></div>
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <span>Journey Date</span>
+        <strong>{{ trip.journeyDate }}</strong>
+      </div>
+
+      <div class="info-box">
+        <span>Fare Paid</span>
+        <strong>₹{{ trip.fare }}</strong>
+      </div>
+
+      <div class="info-box">
+        <span>Class</span>
+        <strong>{{ trip.travelClass }}</strong>
+      </div>
+
+      <div class="info-box">
+        <span>Seats</span>
+        <strong>{{ trip.noOfSeatsBooked }}</strong>
+      </div>
+
+    </div>
+
+    <div class="ticket-footer completed-footer">
+
+      <span class="completed-dot"></span>
+
+      <span>Journey Successfully Completed</span>
+
     </div>
 
   </div>
