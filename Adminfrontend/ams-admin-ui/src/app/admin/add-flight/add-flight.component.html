@@ -65,15 +65,60 @@
 
       <div class="section-title">Fare Configuration</div>
 
-      <input
-        type="number"
-        placeholder="Air Fare (₹)"
-        [(ngModel)]="flight.airFare"
-        name="airFare"
-        required
-        min="100"
-        max="200000"
-      >
+<div class="section-title">
+  Fare Configuration
+</div>
+
+<div class="fare-grid">
+
+  <div class="fare-card">
+
+    <span class="fare-icon">🧳</span>
+
+    <label>Economy Fare</label>
+
+    <input
+      type="number"
+      placeholder="Economy Fare (₹)"
+      [(ngModel)]="flight.economyFare"
+      name="economyFare"
+      required
+      min="100"
+      (input)="calculatePricing()">
+
+  </div>
+
+  <div class="fare-card">
+
+    <span class="fare-icon">💼</span>
+
+    <label>Business Fare</label>
+
+    <input
+      type="number"
+      placeholder="Business Fare (₹)"
+      [(ngModel)]="flight.businessFare"
+      name="businessFare"
+      readonly>
+
+  </div>
+
+  <div class="fare-card">
+
+    <span class="fare-icon">👑</span>
+
+    <label>Executive Fare</label>
+
+    <input
+      type="number"
+      placeholder="Executive Fare (₹)"
+      [(ngModel)]="flight.executiveFare"
+      name="executiveFare"
+      readonly>
+
+  </div>
+
+</div>
 
       <div class="section-title">Seat Allocation</div>
 

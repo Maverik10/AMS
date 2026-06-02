@@ -583,3 +583,9 @@ SELECT COLUMNS FROM FLIGHT [42122-240]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2026-06-03 00:28:04.437231+05:30 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]FLIGHT"; SQL statement:
+FLIGHT [42000-240]
+2026-06-03 00:28:04.989007+05:30 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]FLIGHT"; SQL statement:
+FLIGHT [42000-240]

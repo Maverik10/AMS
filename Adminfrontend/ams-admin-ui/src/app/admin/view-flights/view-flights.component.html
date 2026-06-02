@@ -42,6 +42,7 @@
             <th>Business</th>
             <th>Economy</th>
             <th>Executive</th>
+            <th>Action</th>
 
           </tr>
 
@@ -53,53 +54,55 @@
 
             <td>
               <span class="flight-id">
-                #{{flight.flightId}}
+                #{{ flight.flightId }}
               </span>
             </td>
 
             <td>
-
               <span class="carrier-badge">
-                {{flight.carrierName}}
+                {{ flight.carrierName }}
               </span>
-
             </td>
 
             <td>
 
               <div class="route">
 
-                {{flight.origin}}
+                {{ flight.origin }}
 
                 <span>✈</span>
 
-                {{flight.destination}}
+                {{ flight.destination }}
 
               </div>
 
             </td>
 
             <td>
+              ₹ {{ flight.airFare }}
+            </td>
 
-              ₹ {{flight.airFare}}
+            <td>
+              {{ flight.seatCapacityBusiness }}
+            </td>
 
+            <td>
+              {{ flight.seatCapacityEconomy }}
+            </td>
+
+            <td>
+              {{ flight.seatCapacityExecutive }}
             </td>
 
             <td>
 
-              {{flight.seatCapacityBusiness}}
+              <button
+                class="cancel-btn"
+                (click)="openDeletePopup(flight.flightId)">
 
-            </td>
+                ❌ Cancel
 
-            <td>
-
-              {{flight.seatCapacityEconomy}}
-
-            </td>
-
-            <td>
-
-              {{flight.seatCapacityExecutive}}
+              </button>
 
             </td>
 
@@ -108,6 +111,44 @@
         </tbody>
 
       </table>
+
+    </div>
+
+  </div>
+
+  <!-- DELETE POPUP -->
+
+  <div
+    class="popup-overlay"
+    *ngIf="showDeletePopup">
+
+    <div class="popup-card">
+
+      <h2>Cancel Flight</h2>
+
+      <p>
+        Are you sure you want to cancel this flight?
+      </p>
+
+      <div class="popup-actions">
+
+        <button
+          class="popup-btn cancel-popup"
+          (click)="closePopup()">
+
+          No
+
+        </button>
+
+        <button
+          class="popup-btn confirm-popup"
+          (click)="confirmDelete()">
+
+          Yes, Cancel Flight
+
+        </button>
+
+      </div>
 
     </div>
 

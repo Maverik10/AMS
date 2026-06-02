@@ -222,3 +222,72 @@ select.ng-invalid.ng-touched {
 }
 
 
+/* FARE SECTION */
+
+.fare-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+}
+
+.fare-card{
+
+  background:
+    rgba(255,255,255,.05);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  border-radius:18px;
+
+  padding:18px;
+
+  text-align:center;
+
+  transition:.3s;
+}
+
+.fare-card:hover{
+
+  transform:translateY(-4px);
+
+  border-color:
+    rgba(254,153,1,.25);
+}
+
+.fare-icon{
+
+  display:block;
+
+  font-size:28px;
+
+  margin-bottom:12px;
+}
+
+.fare-card label{
+
+  display:block;
+
+  color:#FE9901;
+
+  font-weight:600;
+
+  margin-bottom:10px;
+}
+
+.fare-card input{
+
+  width:100%;
+}
+
+@media(max-width:800px){
+
+  .fare-grid{
+
+    grid-template-columns:1fr;
+  }
+}
