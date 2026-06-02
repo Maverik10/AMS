@@ -175,9 +175,19 @@
         </div>
 
         <div class="ticket-footer">
-          <span class="confirmed-dot"></span>
-          <span>Confirmed Booking</span>
-        </div>
+
+  <div>
+    <span class="confirmed-dot"></span>
+    <span>Confirmed Booking</span>
+  </div>
+
+  <button
+    class="cancel-btn"
+    (click)="openCancelModal(trip.bookingId)">
+    Cancel Trip
+  </button>
+
+</div>
 
       </div>
 
@@ -188,5 +198,46 @@
     </button>
 
   </main>
+
+</div>
+
+<div
+  class="modal-overlay"
+  *ngIf="showCancelModal">
+
+  <div class="cancel-modal">
+
+    <div class="warning-icon">
+      ⚠️
+    </div>
+
+    <h2>Cancel Booking?</h2>
+
+    <p>
+      This action will cancel your booking
+      and move it to Cancelled Trips.
+    </p>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary-modal-btn"
+        (click)="showCancelModal = false">
+
+        Keep Booking
+
+      </button>
+
+      <button
+        class="danger-modal-btn"
+        (click)="confirmCancel()">
+
+        Cancel Trip
+
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
