@@ -1,0 +1,192 @@
+<!-- <div class="dashboard-wrapper">
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+
+  <img
+    src="assets/images/cloudscanner-logo-notext.png"
+    alt="CloudScanner"
+    class="nav-brand-logo"
+  /> -->
+
+  <!-- <div class="logo-circle">
+    ✈
+  </div> -->
+
+  <!-- <span>Cloud<b>Scanner</b></span>
+
+</div>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/profile">My Profile</a>
+      <a routerLink="/trips">My Trips</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-card">
+    <p class="top-badge">Upcoming Travel</p>
+    <h1>Upcoming Trips</h1>
+
+    <div class="trip-grid">
+
+  <div class="trip-card upcoming-card" *ngFor="let trip of trips">
+
+    <span class="trip-status upcoming">
+      Scheduled
+    </span>
+
+    <h3>
+      ✈ {{ trip.flightName }}
+    </h3>
+
+    <p class="route">
+      {{ trip.origin }} → {{ trip.destination }}
+    </p>
+
+    <div class="trip-meta">
+      <span>🗓 {{ trip.travelDate }}</span>
+      <span>₹{{ trip.price }}</span>
+    </div>
+
+    <div class="trip-divider"></div>
+
+    <div class="trip-footer upcoming-footer">
+      Confirmed Booking
+    </div>
+
+  </div>
+
+</div>
+
+
+    <button class="secondary-btn" routerLink="/trips">Back to Trips</button>
+  </main>
+</div> -->
+
+<div class="dashboard-wrapper">
+
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+
+      <img
+        src="assets/images/cloudscanner-logo-notext.png"
+        alt="CloudScanner"
+        class="nav-brand-logo"
+      />
+
+      <span>Cloud<b>Scanner</b></span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/profile">My Profile</a>
+      <a routerLink="/trips">My Trips</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-card">
+
+    <div class="page-header">
+      <div>
+        <p class="top-badge">Upcoming Travel</p>
+        <h1>Upcoming Trips</h1>
+        <p class="sub-text">
+          Your confirmed upcoming journeys are listed below.
+        </p>
+      </div>
+
+      <div class="booking-count">
+        {{ trips.length }} Booking(s)
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="trips.length === 0">
+      <div class="empty-icon">✈</div>
+      <h2>No Upcoming Trips</h2>
+      <p>You have not booked any upcoming flights yet.</p>
+      <button class="secondary-btn" routerLink="/home">
+        Search Flights
+      </button>
+    </div>
+
+    <div class="trip-grid" *ngIf="trips.length > 0">
+
+      <div class="trip-card upcoming-card" *ngFor="let trip of trips">
+
+        <div class="ticket-glow"></div>
+
+        <div class="card-header">
+          <span class="trip-status upcoming">
+            Scheduled
+          </span>
+
+          <span class="flight-id">
+            #{{ trip.flightId || 'N/A' }}
+          </span>
+        </div>
+
+        <div class="airline-row">
+          <div class="plane-icon">✈</div>
+
+          <div>
+            <h3>
+              {{ trip.flightName || trip.carrierName || 'Flight' }}
+            </h3>
+            <p class="route">
+              {{ trip.origin || 'Origin' }} → {{ trip.destination || 'Destination' }}
+            </p>
+          </div>
+        </div>
+
+        <div class="ticket-line"></div>
+
+        <div class="info-grid">
+
+          <div class="info-box">
+            <span>Journey Date</span>
+            <strong>{{ trip.journeyDate || trip.travelDate || 'Not Available' }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Fare</span>
+            <strong>₹{{ trip.fare || trip.price || 0 }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Class</span>
+            <strong>{{ trip.travelClass || 'Not Selected' }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Passenger ID</span>
+            <strong>{{ trip.passengerId || 'N/A' }}</strong>
+          </div>
+
+        </div>
+
+        <div class="ticket-footer">
+          <span class="confirmed-dot"></span>
+          <span>Confirmed Booking</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button class="secondary-btn back-btn" routerLink="/trips">
+      Back to Trips
+    </button>
+
+  </main>
+
+</div>

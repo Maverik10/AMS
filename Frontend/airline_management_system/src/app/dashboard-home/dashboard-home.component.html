@@ -1,0 +1,317 @@
+<div class="dashboard-wrapper">
+
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="navbar">
+
+
+<div class="nav-brand">
+
+  <img
+    src="assets/images/cloudscanner-logo-notext.png"
+    alt="CloudScanner"
+    class="nav-brand-logo"
+  />
+
+  <span>Cloud<b>Scanner</b></span>
+
+</div>
+
+<div class="nav-links">
+  <a routerLink="/home">Home</a>
+  <a routerLink="/profile">My Profile</a>
+  <a routerLink="/trips">My Trips</a>
+  <button type="button" (click)="logout()">Logout</button>
+</div>
+
+  </nav>
+
+  <main class="dashboard-card">
+
+<!-- HERO SECTION -->
+
+<div class="welcome-row">
+
+  <div class="hero-left">
+
+    <div class="top-badge">
+      Airline Operations Platform
+    </div>
+
+    <h1>
+      {{ greeting }}
+      <span class="accent-name">{{ passengerName }}</span>
+    </h1>
+
+    <p class="sub-text">
+      Monitor routes, manage passenger journeys, and search flights across the CloudScanner network.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- KPI CARDS -->
+
+<div class="stats-grid">
+
+  <div class="stat-card">
+    <span class="stat-number">✈ 120+</span>
+    <p>Flights Available</p>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-number">📡 24/7</span>
+    <p>Monitoring</p>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-number">🏢 15+</span>
+    <p>Airlines</p>
+  </div>
+
+  <div class="stat-card">
+    <span class="stat-number">🎟 500+</span>
+    <p>Bookings</p>
+  </div>
+
+</div>
+
+<!-- SEARCH FORM -->
+
+<form class="search-form" (ngSubmit)="searchFlights()">
+
+  <div class="form-grid">
+
+    <div class="input-group">
+      <label>Origin</label>
+
+      <select [(ngModel)]="search.origin" name="origin" required>
+        <option value="">Select Origin</option>
+        <option *ngFor="let loc of locations" [value]="loc">
+          {{ loc }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Destination</label>
+
+      <select [(ngModel)]="search.destination" name="destination" required>
+        <option value="">Select Destination</option>
+        <option *ngFor="let loc of locations" [value]="loc">
+          {{ loc }}
+        </option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Departure</label>
+
+      <input
+        type="date"
+        [(ngModel)]="search.departure"
+        name="departure"
+        [min]="todayDate"
+        required
+      />
+    </div>
+
+    <div class="input-group">
+      <label>No of Travellers</label>
+
+      <input
+        type="number"
+        min="1"
+        max="10"
+        [(ngModel)]="search.travellers"
+        name="travellers"
+        required
+      />
+    </div>
+
+    <div class="input-group">
+      <label>Class</label>
+
+      <select
+        [(ngModel)]="search.travelClass"
+        name="travelClass"
+        required
+      >
+        <option value="">Select Class</option>
+        <option value="Economy">Economy</option>
+        <option value="Executive">Executive</option>
+        <option value="Business">Business</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div *ngIf="errorMessage" class="message-box">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" class="primary-btn">
+    Search Flights
+  </button>
+
+</form>
+
+<!-- SEARCH RESULT -->
+
+<!-- <div class="result-box" *ngIf="searchDone">
+
+  <h3>Search Submitted Successfully</h3>
+
+  <p>
+    Showing flights from
+    <strong>{{ search.origin }}</strong>
+    to
+    <strong>{{ search.destination }}</strong>
+    on
+    <strong>{{ search.departure }}</strong>
+    for
+    <strong>{{ search.travellers }}</strong>
+    traveller(s) in
+    <strong>{{ search.travelClass }}</strong>
+    class.
+  </p>
+
+</div> -->
+
+<div
+  class="results-header"
+  *ngIf="searchDone && filteredFlights.length > 0"
+>
+  <h3>
+    Flights Found ({{ filteredFlights.length }})
+  </h3>
+
+  <p>
+    {{ search.origin }}
+    →
+    {{ search.destination }}
+    •
+    {{ search.travelClass }}
+  </p>
+</div>
+
+<!-- BACKEND FLIGHTS -->
+
+<div class="result-box" *ngIf="searchDone && filteredFlights.length > 0">
+
+  <h3>Flights Available in Database</h3>
+
+  <!-- <div *ngFor="let flight of filteredFlights">
+
+    <p>
+      <strong>{{ flight.carrierName || 'Unknown Carrier' }}</strong>
+    </p>
+
+    <p>
+      {{ flight.origin }} → {{ flight.destination }}
+    </p>
+
+    <p>
+      Fare: ₹{{ flight.airFare }}
+    </p>
+
+    <hr>
+
+  </div> -->
+
+  
+<!-- <div *ngFor="let flight of filteredFlights" class="flight-card">
+
+    <div class="flight-info">
+      <p><strong>{{ flight.carrierName || 'Unknown Carrier' }}</strong></p>
+      <p>{{ flight.origin }} → {{ flight.destination }}</p>
+      <p>Fare: ₹{{ flight.airFare }}</p>
+    </div>
+
+    
+ <button class="book-btn" (click)="bookFlight(flight)">
+  Book Now
+ </button>
+
+
+  </div> -->
+
+  <div class="flight-results-grid">
+
+  <div
+    *ngFor="let flight of filteredFlights"
+    class="flight-card-modern"
+  >
+
+    <div class="flight-badge">
+      Available
+    </div>
+
+    <div class="flight-header">
+
+      <h3>
+        ✈ {{ flight.carrierName }}
+      </h3>
+
+      <div class="fare-pill">
+        ₹{{ flight.airFare }}
+      </div>
+
+    </div>
+
+    <div class="route-row">
+
+      <div class="route-city">
+        {{ flight.origin }}
+      </div>
+
+      <div class="route-arrow">
+        →
+      </div>
+
+      <div class="route-city">
+        {{ flight.destination }}
+      </div>
+
+    </div>
+
+    <div class="flight-meta">
+
+      <div class="meta-item">
+        👥 {{ search.travellers }} Traveller(s)
+      </div>
+
+      <div class="meta-item">
+        🎟 {{ search.travelClass }}
+      </div>
+
+      <div class="meta-item">
+        📅 {{ search.departure }}
+      </div>
+
+    </div>
+
+    <button
+      class="book-btn-modern"
+      (click)="bookFlight(flight)"
+    >
+      Book Flight →
+    </button>
+
+  </div>
+
+</div>
+
+
+  
+
+</div>
+
+
+
+  </main>
+
+</div>

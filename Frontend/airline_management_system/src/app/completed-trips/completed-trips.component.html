@@ -1,0 +1,75 @@
+<div class="dashboard-wrapper">
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+
+  <img
+    src="assets/images/cloudscanner-logo-notext.png"
+    alt="CloudScanner"
+    class="nav-brand-logo"
+  />
+
+  <!-- <div class="logo-circle">
+    ✈
+  </div> -->
+
+  <span>Cloud<b>Scanner</b></span>
+
+</div>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/profile">My Profile</a>
+      <a routerLink="/trips">My Trips</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-card">
+    <p class="top-badge">Completed Travel</p>
+    <h1>Completed Trips</h1>
+
+    <div class="trip-grid">
+
+  <div class="trip-card completed-card" *ngFor="let trip of trips">
+
+    <span class="trip-status completed">
+      Completed
+    </span>
+
+    <h3>
+      ✈ {{ trip.flightName }}
+    </h3>
+
+    <p class="route">
+      {{ trip.origin }} → {{ trip.destination }}
+    </p>
+
+    <div class="trip-meta">
+
+      <span>
+        🗓 {{ trip.travelDate }}
+      </span>
+
+      <span>
+        ₹{{ trip.price }}
+      </span>
+
+    </div>
+
+    <div class="trip-divider"></div>
+
+    <div class="trip-footer success">
+      Journey Completed
+    </div>
+
+  </div>
+
+</div>
+
+    <button class="secondary-btn" routerLink="/trips">Back to Trips</button>
+  </main>
+</div>

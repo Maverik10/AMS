@@ -1,0 +1,293 @@
+<div class="dashboard-wrapper">
+
+  <!-- Background Effects -->
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <!-- SUCCESS SCREEN -->
+  <ng-container *ngIf="ackVisible; else registrationPage">
+
+    <main class="dashboard-card success-card">
+
+      <div class="success-icon">✓</div>
+
+      <p class="top-badge">Registration Successful</p>
+
+      <h1>Welcome to CloudScanner</h1>
+
+      <p class="sub-text">
+        Your passenger profile has been created successfully.
+        Please save your credentials before continuing.
+      </p>
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon">🪪</div>
+          <div class="stat-number">{{ passengerId }}</div>
+          <div class="stat-label">Passenger ID</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🔑</div>
+          <div class="stat-number">{{ generatedPassword }}</div>
+          <div class="stat-label">Password</div>
+        </div>
+
+      </div>
+
+      <a routerLink="/login" class="primary-btn">
+        Go to Login
+      </a>
+
+    </main>
+
+  </ng-container>
+
+  <!-- REGISTRATION PAGE -->
+  <ng-template #registrationPage>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+      <div class="nav-brand">
+
+        <img
+          src="assets/images/cloudscanner-logo-notext.png"
+          alt="CloudScanner"
+          class="nav-brand-logo"
+        />
+
+        <span>Cloud<b>Scanner</b></span>
+
+      </div>
+
+      <div class="nav-links">
+        <a routerLink="/login">Login</a>
+      </div>
+
+    </nav>
+
+    <!-- MAIN CARD -->
+    <main class="dashboard-card">
+
+      <p class="top-badge">Passenger Registration</p>
+
+      <h1>Create Passenger Profile</h1>
+
+      <p class="sub-text">
+        Register to access bookings, travel history,
+        flight management and passenger services.
+      </p>
+
+      <!-- INFO CARDS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-icon">🪪</div>
+          <div class="stat-number feature-title">ID</div>
+          <div class="stat-label">Auto Generated</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🔒</div>
+          <div class="stat-number feature-title">Secure</div>
+          <div class="stat-label">Protected Account</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">✈️</div>
+          <div class="stat-number feature-title">Travel</div>
+          <div class="stat-label">Booking Access</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📧</div>
+          <div class="stat-number feature-title">Alerts</div>
+          <div class="stat-label">Flight Updates</div>
+        </div>
+
+      </div>
+
+      <!-- FORM CARD -->
+
+      <div class="form-card">
+
+        <h2>Personal Information</h2>
+
+        <div
+          class="message-box"
+          *ngIf="errorMessage"
+        >
+          {{ errorMessage }}
+        </div>
+
+        <form
+          #registerForm="ngForm"
+          (ngSubmit)="onRegister(registerForm)"
+          novalidate
+        >
+
+          <!-- NAME ROW -->
+
+          <div class="form-row">
+
+            <div class="input-group">
+
+              <label>First Name</label>
+
+              <input
+                type="text"
+                name="firstName"
+                maxlength="50"
+                placeholder="Enter First Name"
+                [(ngModel)]="passenger.firstName"
+                (input)="validateName('firstName')"
+                required
+              />
+
+            </div>
+
+            <div class="input-group">
+
+              <label>Last Name</label>
+
+              <input
+                type="text"
+                name="lastName"
+                maxlength="50"
+                placeholder="Enter Last Name"
+                [(ngModel)]="passenger.lastName"
+                (input)="validateName('lastName')"
+                required
+              />
+
+            </div>
+
+          </div>
+
+          <!-- DOB -->
+
+          <div class="input-group">
+
+            <label>Date of Birth</label>
+
+            <input
+              type="date"
+              name="dob"
+              [max]="todayDate"
+              [(ngModel)]="passenger.dob"
+              required
+            />
+
+          </div>
+
+          <!-- EMAIL -->
+
+          <div class="input-group">
+
+            <label>Email ID</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Email ID"
+              [(ngModel)]="passenger.email"
+              required
+            />
+
+          </div>
+
+          <!-- ADDRESS -->
+
+          <div class="input-group">
+
+            <label>Address</label>
+
+            <textarea
+              name="address"
+              maxlength="100"
+              placeholder="Street, City..."
+              [(ngModel)]="passenger.address"
+              required
+            ></textarea>
+
+          </div>
+
+          <!-- CONTACT -->
+
+          <div class="input-group">
+
+            <label>Contact Number</label>
+
+            <input
+              type="text"
+              name="contact"
+              maxlength="10"
+              placeholder="10-digit contact number"
+              [(ngModel)]="passenger.contact"
+              (input)="validateContact()"
+              required
+            />
+
+          </div>
+
+          <!-- BUTTONS -->
+
+          <div class="button-row">
+
+            <button
+              type="submit"
+              class="primary-btn"
+            >
+              Create Profile
+            </button>
+
+            <button
+              type="button"
+              class="secondary-btn"
+              (click)="onReset(registerForm)"
+            >
+              Reset
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- SUPPORT CARD -->
+
+      <div class="support-card">
+
+        <h3>Need Help?</h3>
+
+        <div class="support-grid">
+
+          <div>
+            <strong>Email</strong>
+            <p>support&#64;cloudscanner.com</p>
+          </div>
+
+          <div>
+            <strong>Phone</strong>
+            <p>+91 98765 43210</p>
+          </div>
+
+          <div>
+            <strong>Availability</strong>
+            <p>24/7 Support</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </ng-template>
+
+</div>

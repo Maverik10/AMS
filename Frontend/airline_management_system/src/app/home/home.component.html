@@ -1,0 +1,110 @@
+<!-- Background -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-grid"></div>
+
+<main class="page">
+
+  <!-- LEFT BRAND PANEL -->
+  <section class="brand-panel">
+    <div class="brand-card">
+
+      <div class="logo-wrap">
+        <div class="logo-ring"></div>
+        <div class="logo-core">
+          <span>AMS</span>
+        </div>
+      </div>
+
+      <h1>Airline Management System</h1>
+
+      <p class="brand-sub">
+        Welcome to your passenger dashboard. Access flights, bookings,
+        profile information, and travel services securely in one place.
+      </p>
+
+      <div class="info-box">
+        <h3>Dashboard Access</h3>
+        <p>Use the menu options on the right to continue your journey.</p>
+      </div>
+
+      <div class="info-box">
+        <h3>Quick Support</h3>
+        <p><strong>Email:</strong> support&#64;amsairline.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-chip">✈ Flight Search</div>
+        <div class="feature-chip">🎟 Booking Services</div>
+        <div class="feature-chip">👤 Passenger Profile</div>
+        <div class="feature-chip">🔒 Secure Logout</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RIGHT HOME PANEL -->
+  <section class="form-panel">
+    <div class="home-card">
+
+      <div class="top-badge">AMS Passenger Dashboard</div>
+
+      <h2>Welcome Aboard</h2>
+
+      <p class="sub-text">
+        Select one of the options below to continue.
+      </p>
+
+      <div class="home-grid">
+
+        <div
+          class="home-tile"
+          tabindex="0"
+          role="button"
+          (click)="goToFlights()"
+          (keydown.enter)="goToFlights()"
+        >
+          <h3>✈ Flights</h3>
+          <p>Search schedules and explore available flights.</p>
+        </div>
+
+        <div
+          class="home-tile"
+          tabindex="0"
+          role="button"
+          (click)="goToBookings()"
+          (keydown.enter)="goToBookings()"
+        >
+          <h3>🎟 My Bookings</h3>
+          <p>Check, manage, or review your reservations.</p>
+        </div>
+
+        <div
+          class="home-tile"
+          tabindex="0"
+          role="button"
+          (click)="goToProfile()"
+          (keydown.enter)="goToProfile()"
+        >
+          <h3>👤 My Profile</h3>
+          <p>View your personal details and passenger account.</p>
+        </div>
+
+        <div
+          class="home-tile"
+          tabindex="0"
+          role="button"
+          (click)="logout()"
+          (keydown.enter)="logout()"
+        >
+          <h3>🚪 Logout</h3>
+          <p>Exit the portal safely and return to login.</p>
+        </div>
+
+      </div>
+
+      
+  </section>
+
+</main>

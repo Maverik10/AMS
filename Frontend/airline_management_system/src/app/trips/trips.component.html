@@ -1,0 +1,195 @@
+<div class="dashboard-wrapper">
+
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <nav class="navbar">
+    <div class="nav-brand">
+
+  <img
+    src="assets/images/cloudscanner-logo-notext.png"
+    alt="CloudScanner"
+    class="nav-brand-logo"
+  />
+
+  <!-- <div class="logo-circle">
+    ✈
+  </div> -->
+
+  <span>Cloud<b>Scanner</b></span>
+
+</div>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/profile">My Profile</a>
+      <a routerLink="/trips">My Trips</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-card">
+
+  <!-- HERO -->
+
+  <div class="trips-hero">
+
+    <span class="top-badge">
+      Passenger Trips
+    </span>
+
+    <h1>My Trips</h1>
+
+    <p class="sub-text">
+      Manage your upcoming, completed and cancelled journeys.
+    </p>
+
+  </div>
+
+  <!-- STATS -->
+
+  <!-- STATS -->
+
+<div class="trip-stats">
+
+  <div class="trip-stat-card upcoming-stat">
+    <div class="trip-stat-number">{{ upcomingTrips }}</div>
+    <div class="trip-stat-label">Upcoming Trips</div>
+  </div>
+
+  <div class="trip-stat-card completed-stat">
+    <div class="trip-stat-number">{{ completedTrips }}</div>
+    <div class="trip-stat-label">Completed Trips</div>
+  </div>
+
+  <div class="trip-stat-card cancelled-stat">
+    <div class="trip-stat-number">{{ cancelledTrips }}</div>
+    <div class="trip-stat-label">Cancelled Trips</div>
+  </div>
+
+  <div class="trip-stat-card spend-stat">
+    <div class="trip-stat-number">₹{{ travelSpend }}</div>
+    <div class="trip-stat-label">Travel Spend</div>
+  </div>
+
+</div>
+
+  <!-- MAIN TRIP CARDS -->
+
+  <div class="trip-link-grid">
+
+    <a routerLink="/trips/upcoming" class="trip-tile">
+
+      <div class="trip-icon">🧳</div>
+
+      <!-- <div class="trip-count">5</div> -->
+
+      <h3>Upcoming Trips</h3>
+
+      <p>
+        View upcoming flights,
+        schedules and travel plans.
+      </p>
+
+      <span class="trip-action">
+        Open Trips →
+      </span>
+
+    </a>
+
+    <a routerLink="/trips/completed" class="trip-tile">
+
+      <div class="trip-icon">✈️</div>
+
+      <!-- <div class="trip-count">12</div> -->
+
+      <h3>Completed Trips</h3>
+
+      <p>
+        View journey history,
+        past flights and records.
+      </p>
+
+      <span class="trip-action">
+        Open History →
+      </span>
+
+    </a>
+
+    <a routerLink="/trips/cancelled" class="trip-tile">
+
+      <div class="trip-icon">🗑️</div>
+
+      <!-- <div class="trip-count">2</div> -->
+
+      <h3>Cancelled Trips</h3>
+
+      <p>
+        Review cancellations,
+        refunds and travel updates.
+      </p>
+
+      <span class="trip-action">
+        Open Records →
+      </span>
+
+    </a>
+
+  </div>
+
+  <!-- INSIGHTS -->
+
+  <div class="section-title">
+    Travel Insights
+  </div>
+
+  <div class="insights-grid">
+
+    <div class="insight-card">
+      <span>🌍</span>
+      <h3>8</h3>
+      <p>Cities Visited</p>
+    </div>
+
+    <div class="insight-card">
+      <span>🏆</span>
+      <h3>Gold</h3>
+      <p>Loyalty Tier</p>
+    </div>
+
+    <div class="insight-card">
+      <span>⭐</span>
+      <h3>4.8</h3>
+      <p>Traveller Rating</p>
+    </div>
+
+    <div class="insight-card">
+      <span>📍</span>
+      <h3>Delhi</h3>
+      <p>Most Visited City</p>
+    </div>
+
+  </div>
+
+  <!-- QUICK ACTIONS -->
+
+  <div class="section-title">
+    Quick Actions
+  </div>
+
+  <div class="quick-actions">
+
+    <a routerLink="/home" class="action-btn">
+      Search Flights
+    </a>
+
+    <a routerLink="/profile" class="action-btn secondary">
+      My Profile
+    </a>
+
+  </div>
+
+</main>
+
+</div>

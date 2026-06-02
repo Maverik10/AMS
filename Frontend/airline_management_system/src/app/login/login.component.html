@@ -1,0 +1,186 @@
+```html
+<!-- Background -->
+<div class="bg-overlay"></div>
+<div class="bg-glow glow-left"></div>
+<div class="bg-glow glow-right"></div>
+
+<main class="login-layout">
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+
+    <div class="hero-content">
+
+      <div class="brand-pill">
+        ☁ CloudScanner
+      </div>
+
+      <div class="hero-header">
+
+  <div class="hero-kicker">
+    CLOUDSCANNER
+  </div>
+
+<div class="hero-brand">
+
+  <!-- <img
+    src="assets/images/cloudscanner-logo.png"
+    alt="CloudScanner"
+    class="hero-logo"
+  /> -->
+
+  <div class="hero-brand-text">
+    <span class="brand-label">CLOUDSCANNER</span>
+
+    <h1 class="hero-title">
+      Airline Operations Platform
+    </h1>
+  </div>
+
+</div>
+
+  <p class="hero-description">
+    Real-time aviation intelligence for monitoring flights,
+    managing passenger services, and streamlining airline operations.
+  </p>
+
+  <div class="service-chips">
+    <div class="service-chip">✈ Flight Monitoring</div>
+    <div class="service-chip">📊 Operations Analytics</div>
+    <div class="service-chip">👥 Passenger Services</div>
+</div>
+
+</div>
+
+
+      
+
+      <div class="aircraft-container">
+<div class="hero-image-container">
+    <img
+      src="assets/images/aircraft-hero.png"
+      alt="Aircraft"
+      class="hero-image"
+    />
+
+    <!-- <img
+      src="assets/images/cloudscanner-logo.png"
+      alt="CloudScanner"
+      class="cloudscanner-logo"
+    > -->
+</div>
+    <div class="hero-stats">
+
+        <div class="glass-chip">
+            <span>✈ 120+</span> Flights
+        </div>
+
+        <div class="glass-chip">
+            <span>📡 24/7</span> Monitoring
+        </div>
+
+        <div class="glass-chip">
+            <span>🏢 15+</span> Carriers
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+
+  </section>
+
+  <!-- LOGIN SECTION -->
+  <section class="login-section">
+
+    <div class="login-card">
+
+      <div class="login-badge">
+        Passenger Portal
+      </div>
+
+      <h2>Welcome Back</h2>
+
+      <p class="login-subtitle">
+        Sign in to continue your journey.
+      </p>
+
+      <form (ngSubmit)="loginUser()" autocomplete="off">
+
+        <div *ngIf="errorMsg" class="message-box">
+          {{ errorMsg }}
+        </div>
+
+        <div class="input-group">
+          <label>User ID</label>
+
+          <div class="input-wrapper">
+            <input
+              type="text"
+              [(ngModel)]="userId"
+              name="userId"
+              maxlength="5"
+              (input)="onUserIdInput()"
+              placeholder="Enter User ID"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+
+          <div class="input-wrapper">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+
+            <button
+              type="button"
+              class="eye-btn"
+              (click)="togglePassword()"
+            >
+              👁
+            </button>
+
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn">
+          ✈ Continue Journey
+        </button>
+
+      </form>
+
+      <p class="register-text">
+        Not a passenger yet?
+        <a routerLink="/register">
+          Create Your Account
+        </a>
+      </p>
+
+    </div>
+
+  </section>
+
+  <div *ngIf="showSuccess" class="success-popup">
+
+  <div class="success-icon">
+    ✓
+  </div>
+
+  <div class="success-content">
+    <h3>Login Successful</h3>
+    <p>Welcome back to CloudScanner</p>
+  </div>
+
+</div>
+
+</main>
+```

@@ -1,0 +1,267 @@
+<div class="dashboard-wrapper">
+
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-grid"></div>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+    <div class="nav-brand">
+      <img
+        src="assets/images/cloudscanner-logo-notext.png"
+        alt="CloudScanner"
+        class="nav-brand-logo"
+      />
+      <span>CloudScanner</span>
+    </div>
+
+    <div class="nav-links">
+      <a routerLink="/home">Home</a>
+      <a routerLink="/profile">My Profile</a>
+      <a routerLink="/trips">My Trips</a>
+      <button type="button" (click)="logout()">Logout</button>
+    </div>
+
+  </nav>
+
+  <!-- MAIN CARD -->
+
+  <main class="dashboard-card">
+
+    <!-- HERO -->
+
+    <div class="profile-hero">
+
+      <div class="profile-avatar">
+        {{ passenger.firstName?.charAt(0) }}{{ passenger.lastName?.charAt(0) }}
+      </div>
+
+      <div class="profile-header">
+
+        <span class="top-badge">
+          Passenger Profile
+        </span>
+
+        <h1>
+          {{ passenger.firstName }}
+          <span class="accent-name">
+            {{ passenger.lastName }}
+          </span>
+        </h1>
+
+        <p class="profile-id">
+          Passenger ID #{{ passenger.id }}
+        </p>
+
+        <p class="profile-tagline">
+          Manage your account information and travel preferences.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div *ngIf="message" class="success-box">
+      {{ message }}
+    </div>
+
+    <!-- STATS -->
+
+    <!-- STATS -->
+
+<div class="profile-stats">
+
+  <div class="profile-stat">
+    <span>✈ {{ completedTrips }}</span>
+    <p>Flights Completed</p>
+  </div>
+
+  <div class="profile-stat">
+    <span>🧳 {{ upcomingTrips }}</span>
+    <p>Upcoming Trips</p>
+  </div>
+
+  <div class="profile-stat">
+    <span>🌍 {{ bookings.length }}</span>
+    <p>Total Bookings</p>
+  </div>
+
+  <div class="profile-stat gold">
+    <span>🏆 Gold</span>
+    <p>Loyalty Tier</p>
+  </div>
+
+</div>
+
+    <!-- VIEW MODE -->
+
+<div *ngIf="!editMode">
+
+  <!-- PERSONAL -->
+
+  <div class="info-card">
+
+    <h3>Personal Information</h3>
+
+    <div class="info-grid">
+
+      <div>
+        <label>First Name</label>
+        <span>{{ passenger.firstName }}</span>
+      </div>
+
+      <div>
+        <label>Last Name</label>
+        <span>{{ passenger.lastName }}</span>
+      </div>
+
+      <div>
+        <label>Date of Birth</label>
+        <span>{{ passenger.dob }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CONTACT -->
+
+  <div class="info-card">
+
+    <h3>Contact Information</h3>
+
+    <div class="info-grid">
+
+      <div>
+        <label>Email</label>
+        <span class="email-highlight">{{ passenger.email }}</span>
+      </div>
+
+      <div>
+        <label>Phone</label>
+        <span>{{ passenger.contactNumber }}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ADDRESS -->
+
+  <div class="info-card">
+
+    <h3>Address</h3>
+
+    <p class="address-text">
+      {{ passenger.address }}
+    </p>
+
+  </div>
+
+  <div class="button-row">
+
+    <button
+      type="button"
+      class="primary-btn"
+      (click)="enableEdit()">
+
+      Edit Profile
+
+    </button>
+
+  </div>
+
+</div>
+
+    <!-- EDIT MODE -->
+
+    <form
+      *ngIf="editMode"
+      class="search-form">
+
+      <div class="form-grid">
+
+        <div class="input-group">
+          <label>First Name</label>
+          <input
+            type="text"
+            [(ngModel)]="passenger.firstName"
+            name="firstName">
+        </div>
+
+        <div class="input-group">
+          <label>Last Name</label>
+          <input
+            type="text"
+            [(ngModel)]="passenger.lastName"
+            name="lastName">
+        </div>
+
+        <div class="input-group">
+          <label>Date of Birth</label>
+          <input
+            type="date"
+            [(ngModel)]="passenger.dob"
+            name="dob">
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input
+            type="email"
+            [(ngModel)]="passenger.email"
+            name="email">
+        </div>
+
+        <div class="input-group">
+          <label>Contact Number</label>
+          <input
+            type="text"
+            [(ngModel)]="passenger.contactNumber"
+            name="contactNumber">
+        </div>
+
+      </div>
+
+      <div class="input-group full-width">
+
+        <label>Address</label>
+
+        <textarea
+          [(ngModel)]="passenger.address"
+          name="address">
+        </textarea>
+
+      </div>
+
+      <div class="button-row">
+
+        <button
+          type="button"
+          class="primary-btn"
+          (click)="saveProfile()">
+
+          Save Changes
+
+        </button>
+
+        <button
+          type="button"
+          class="secondary-btn"
+          (click)="editMode = false">
+
+          Cancel
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </main>
+
+</div>
