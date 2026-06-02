@@ -1,6 +1,5 @@
 package com.Airline.management.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -68,13 +67,7 @@ public class userController {
         return ResponseEntity.ok(userObj);
     }
 
-    // ✅ 3. GET ALL USERS (ADMIN/DEBUG)
-    @GetMapping("/")
-    public ResponseEntity<List<user>> getAll() {
-        return ResponseEntity.ok(userRepository1.findAll());
-    }
-
-    // ✅ 4. GET USER BY ID (MY PROFILE)
+    // ✅ 3. GET USER BY ID (MY PROFILE)
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id) {
         Optional<user> userOpt = userRepository1.findById(id);

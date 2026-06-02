@@ -84,19 +84,21 @@ ngOnInit(): void {
 
   const passengerId = Number(loggedInUser);
 
+  
+
   this.bookingService
-    .getBookingsByPassenger(passengerId)
+    .getUpcomingBookings(passengerId)
     .subscribe({
 
       next: (bookings: Booking[]) => {
 
-        const upcomingBookings =
-          bookings.filter(
-            booking => booking.status === 'UPCOMING'
-          );
+        // const upcomingBookings =
+        //   bookings.filter(
+        //     booking => booking.status === 'UPCOMING'
+        //   );
 
         const requests =
-          upcomingBookings.map(
+          bookings.map(
             booking =>
               this.flightService.getFlightById(
                 booking.flightId
@@ -108,7 +110,7 @@ ngOnInit(): void {
           next: (flights) => {
 
             this.trips =
-              upcomingBookings.map(
+              bookings.map(
                 (booking, index) => ({
 
                   ...booking,
@@ -173,7 +175,19 @@ closeCancelModal(): void {
 
   this.selectedBookingId = null;
 }
+getDaysLeft(date: string): number {
 
+  const today = new Date();
+
+  const journey = new Date(date);
+
+  const diff =
+    journey.getTime() - today.getTime();
+
+  return Math.ceil(
+    diff / (1000 * 60 * 60 * 24)
+  );
+}
 confirmCancel(): void {
 
   if (!this.selectedBookingId) {

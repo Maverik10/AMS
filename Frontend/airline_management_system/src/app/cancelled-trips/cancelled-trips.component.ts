@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
+import { BookingService, Booking } from '../services/booking.service';
+import { FlightService } from '../services/flight.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cancelled-trips',
@@ -14,24 +16,83 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class CancelledTripsComponent implements OnInit {
 
-  trips = [
-    { flightName: 'SpiceJet SG-145', origin: 'Mumbai', destination: 'Delhi', travelDate: '2026-04-08', price: 4500 },
-    { flightName: 'Air India AI-702', origin: 'Goa', destination: 'Hyderabad', travelDate: '2026-04-18', price: 6100 },
-    { flightName: 'Indigo 6E-517', origin: 'Pune', destination: 'Chennai', travelDate: '2026-05-02', price: 5800 }
-  ];
+  trips: any[] = [];
 
-  constructor(private router: Router,
-  @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+  private router: Router,
+  private bookingService: BookingService,
+  private flightService: FlightService,
+  @Inject(PLATFORM_ID) private platformId: Object
+) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
 
-      if (!localStorage.getItem('loggedInUser')) {
-        this.router.navigate(['/login']);
+  if (!isPlatformBrowser(this.platformId)) {
+    return;
+  }
+
+  const loggedInUser =
+    localStorage.getItem('loggedInUser');
+
+  if (!loggedInUser) {
+    this.router.navigate(['/login']);
+    return;
+  }
+
+  const passengerId = Number(loggedInUser);
+
+  this.bookingService
+    .getCancelledBookings(passengerId)
+    .subscribe({
+
+      next: (bookings: Booking[]) => {
+
+        const requests =
+          bookings.map(
+            (booking: Booking) =>
+              this.flightService.getFlightById(
+                booking.flightId
+              )
+          );
+
+        forkJoin(requests).subscribe({
+
+          next: (flights: any[]) => {
+
+            this.trips =
+              bookings.map(
+                (booking: Booking, index: number) => ({
+
+                  ...booking,
+
+                  flightName:
+                    flights[index].carrierName,
+
+                  origin:
+                    flights[index].origin,
+
+                  destination:
+                    flights[index].destination
+
+                })
+              );
+
+          },
+
+          error: (err) => {
+            console.error(err);
+          }
+
+        });
+
+      },
+
+      error: (err) => {
+        console.error(err);
       }
 
-    }
-  }
+    });
+}
 
   logout(): void {
     if (typeof window !== 'undefined') {
@@ -43,18 +104,18 @@ export class CancelledTripsComponent implements OnInit {
   }
 
 
-  cancelFlight(trip: any) {
-    let cancelledTrips = JSON.parse(localStorage.getItem('cancelledTrips') || '[]');
+  // cancelFlight(trip: any) {
+  //   let cancelledTrips = JSON.parse(localStorage.getItem('cancelledTrips') || '[]');
 
-    cancelledTrips.push(trip);
+  //   cancelledTrips.push(trip);
 
-    localStorage.setItem('cancelledTrips', JSON.stringify(cancelledTrips));
+  //   localStorage.setItem('cancelledTrips', JSON.stringify(cancelledTrips));
 
-    alert('Flight cancelled ✅');
+  //   alert('Flight cancelled ✅');
 
-    // update UI
-    this.trips = cancelledTrips;
-  }
+  //   // update UI
+  //   this.trips = cancelledTrips;
+  // }
 }
 
 

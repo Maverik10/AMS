@@ -1,10 +1,13 @@
 package com.Airline.management.service.impl;
 import com.Airline.management.dto.SearchFlightResponseDto;
 import com.Airline.management.dto.FlightRequestDto;
+import com.Airline.management.model.Booking;
 import com.Airline.management.model.Flight;
+import com.Airline.management.repository.BookingRepository;
 import com.Airline.management.repository.FlightRepository;
 import com.Airline.management.service.FlightService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,9 +16,12 @@ import java.util.List;
 public class FlightServiceImpl implements FlightService {
 
     private final FlightRepository repository;
+    private final BookingRepository bookingRepository;
 
-    public FlightServiceImpl(FlightRepository repository) {
+    public FlightServiceImpl(FlightRepository repository,
+                             BookingRepository bookingRepository) {
         this.repository = repository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
@@ -53,23 +59,6 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight updateFlight(Long id, Flight flight) {
-
-        Flight existing = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Flight not found"));
-
-        existing.setCarrierName(flight.getCarrierName());
-        existing.setOrigin(flight.getOrigin());
-        existing.setDestination(flight.getDestination());
-        existing.setDepartureDate(flight.getDepartureDate());
-        existing.setSeatCapacityBusiness(flight.getSeatCapacityBusiness());
-        existing.setSeatCapacityEconomy(flight.getSeatCapacityEconomy());
-        existing.setSeatCapacityExecutive(flight.getSeatCapacityExecutive());
-
-        return repository.save(existing);
-    }
-
-    @Override
     public List<SearchFlightResponseDto> searchFlights(
         String origin,
         String destination,
@@ -86,6 +75,7 @@ public class FlightServiceImpl implements FlightService {
             );
 
     return flights.stream()
+            .filter(flight -> "UPCOMING".equalsIgnoreCase(flight.getStatus()))
             .filter(flight ->
                     hasAvailableSeats(
                             flight,
@@ -167,13 +157,54 @@ public class FlightServiceImpl implements FlightService {
                         new RuntimeException("Flight not found"));
     }
     @Override
-    public void deleteFlight(Long flightId) {
+    @Transactional
+    public Flight cancelFlight(Long flightId) {
 
         Flight flight = repository.findById(flightId)
                 .orElseThrow(() ->
                         new RuntimeException("Flight not found"));
 
-        repository.delete(flight);
+        if ("CANCELLED".equalsIgnoreCase(flight.getStatus())) {
+            throw new RuntimeException("Flight is already cancelled");
+        }
+
+        // Cancel every upcoming ticket on this flight.
+        List<Booking> tickets =
+                bookingRepository.findByFlightIdAndStatus(flightId, "UPCOMING");
+
+        for (Booking ticket : tickets) {
+            ticket.setStatus("CANCELLED");
+        }
+
+        bookingRepository.saveAll(tickets);
+
+        flight.setStatus("CANCELLED");
+
+        return repository.save(flight);
+    }
+
+    @Override
+    @Transactional
+    public void completePastFlights() {
+
+        List<Flight> pastFlights =
+                repository.findByStatusAndDepartureDateBefore("UPCOMING", LocalDate.now());
+
+        for (Flight flight : pastFlights) {
+            flight.setStatus("COMPLETED");
+
+            // Complete every upcoming ticket on this flight (leave cancelled ones as-is).
+            List<Booking> tickets =
+                    bookingRepository.findByFlightIdAndStatus(flight.getFlightId(), "UPCOMING");
+
+            for (Booking ticket : tickets) {
+                ticket.setStatus("COMPLETED");
+            }
+
+            bookingRepository.saveAll(tickets);
+        }
+
+        repository.saveAll(pastFlights);
     }
     @Override
     public long getActiveFlightCount() {

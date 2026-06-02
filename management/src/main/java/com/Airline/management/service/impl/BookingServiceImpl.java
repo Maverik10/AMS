@@ -59,18 +59,6 @@ public class BookingServiceImpl implements BookingService {
         return bookingRepository.save(booking);
     }
     @Override
-    public Booking completeBooking(Long bookingId) {
-
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() ->
-                        new RuntimeException("Booking not found"));
-
-        booking.setStatus("COMPLETED");
-
-        return bookingRepository.save(booking);
-    }
-
-    @Override
     public List<Booking> getUpcomingBookings(Long passengerId) {
         return bookingRepository.findByPassengerIdAndStatus(passengerId, "UPCOMING");
     }

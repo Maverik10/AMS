@@ -15,8 +15,6 @@ public interface FlightService {
 
     List<Flight> getByCarrierName(String name);
 
-    Flight updateFlight(Long id, Flight flight);
-
     List<SearchFlightResponseDto> searchFlights(
             String origin,
             String destination,
@@ -27,6 +25,9 @@ public interface FlightService {
 
     Flight getFlightById(Long flightId);
 
-    void deleteFlight(Long flightId);
+    Flight cancelFlight(Long flightId);
+
+    void completePastFlights();
+    // void deleteFlight(Long flightId);
     long getActiveFlightCount();
 }

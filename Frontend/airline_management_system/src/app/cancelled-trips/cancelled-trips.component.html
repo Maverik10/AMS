@@ -45,14 +45,33 @@
         </p>
         
        <!-- ✅ ADD THIS -->
-       <button (click)="cancelFlight(trip)">
+       <!-- <button (click)="cancelFlight(trip)">
        Cancel Flight
-       </button>
+       </button> -->
 
 
-        <div class="trip-meta">
-          <span>📅 {{ trip.travelDate }}</span>
-          <span>₹{{ trip.price }}</span>
+        <div class="info-grid">
+
+          <div class="info-box">
+            <span>Journey Date</span>
+            <strong>{{ trip.journeyDate }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Fare</span>
+            <strong>₹{{ trip.fare }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Class</span>
+            <strong>{{ trip.travelClass }}</strong>
+          </div>
+
+          <div class="info-box">
+            <span>Seats</span>
+            <strong>{{ trip.noOfSeatsBooked }}</strong>
+          </div>
+
         </div>
 
         <div class="refund-status">
@@ -74,4 +93,6 @@
   </main>
 
 </div>
+
+
 ``
