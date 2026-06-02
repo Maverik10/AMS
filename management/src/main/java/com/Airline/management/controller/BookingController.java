@@ -1,5 +1,6 @@
 package com.Airline.management.controller;
 
+import com.Airline.management.dto.BookingCountDto;
 import com.Airline.management.model.Booking;
 import com.Airline.management.service.BookingService;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,34 @@ public class BookingController {
             @PathVariable Long bookingId) {
 
         return bookingService.getBookingById(bookingId);
+    }
+
+    @GetMapping("/passenger/{passengerId}/upcoming")
+    public List<Booking> getUpcomingBookings(
+            @PathVariable Long passengerId) {
+
+        return bookingService.getUpcomingBookings(passengerId);
+    }
+
+    @GetMapping("/passenger/{passengerId}/cancelled")
+    public List<Booking> getCancelledBookings(
+            @PathVariable Long passengerId) {
+
+        return bookingService.getCancelledBookings(passengerId);
+    }
+
+    @GetMapping("/passenger/{passengerId}/completed")
+    public List<Booking> getCompletedBookings(
+            @PathVariable Long passengerId) {
+
+        return bookingService.getCompletedBookings(passengerId);
+    }
+
+    @GetMapping("/passenger/{passengerId}/counts")
+    public BookingCountDto getBookingCounts(
+            @PathVariable Long passengerId) {
+
+        return bookingService.getBookingCounts(passengerId);
     }
     @PutMapping("/{bookingId}/cancel")
     public Booking cancelBooking(

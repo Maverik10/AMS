@@ -141,13 +141,67 @@ ngOnInit(): void {
       }
 
     });
+
+    
 }
   logout(): void {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('loggedInUser');
-      localStorage.removeItem('loggedInPassenger');
-    }
 
-    this.router.navigate(['/login']);
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('loggedInPassenger');
   }
+
+  this.router.navigate(['/login']);
+}
+
+showCancelModal = false;
+
+selectedBookingId: number | null = null;
+
+openCancelModal(bookingId: number): void {
+
+  console.log('Button clicked', bookingId);
+
+  this.selectedBookingId = bookingId;
+
+  this.showCancelModal = true;
+}
+
+closeCancelModal(): void {
+
+  this.showCancelModal = false;
+
+  this.selectedBookingId = null;
+}
+
+confirmCancel(): void {
+
+  if (!this.selectedBookingId) {
+    return;
+  }
+
+  this.bookingService
+    .cancelBooking(this.selectedBookingId)
+    .subscribe({
+
+      next: () => {
+
+        this.trips =
+          this.trips.filter(
+            trip =>
+              trip.bookingId !== this.selectedBookingId
+          );
+
+        this.closeCancelModal();
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        alert('Cancellation failed');
+      }
+
+    });
+}
 }

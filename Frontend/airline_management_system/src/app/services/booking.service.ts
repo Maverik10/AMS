@@ -29,4 +29,14 @@ export class BookingService {
       `${this.baseUrl}/passenger/${passengerId}`
     );
   }
+
+  cancelBooking(
+  bookingId: number
+): Observable<Booking> {
+
+  return this.http.put<Booking>(
+    `${this.baseUrl}/${bookingId}/cancel`,
+    {}
+  );
+} 
 }

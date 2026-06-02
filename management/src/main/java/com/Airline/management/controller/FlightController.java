@@ -1,6 +1,7 @@
 package com.Airline.management.controller;
 
 import com.Airline.management.dto.FlightRequestDto;
+import com.Airline.management.dto.SearchFlightResponseDto;
 import com.Airline.management.model.Flight;
 import com.Airline.management.service.FlightService;
 
@@ -42,7 +43,7 @@ public class FlightController {
     }
     
     @GetMapping("/search")
-    public List<Flight> searchFlights(
+    public List<SearchFlightResponseDto> searchFlights(
             @RequestParam String origin,
             @RequestParam String destination,
             @RequestParam 

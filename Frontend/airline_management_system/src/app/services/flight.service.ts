@@ -9,9 +9,15 @@ export interface Flight {
   origin: string;
   destination: string;
   airFare: number;
+  departureDate: string;
+
   seatCapacityBusiness: number;
   seatCapacityEconomy: number;
   seatCapacityExecutive: number;
+
+  leftSeatCapacityBusiness: number;
+  leftSeatCapacityEconomy: number;
+  leftSeatCapacityExecutive: number;
 }
 
 @Injectable({

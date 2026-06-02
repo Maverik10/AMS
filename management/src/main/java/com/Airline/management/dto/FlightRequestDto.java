@@ -15,8 +15,9 @@ public class FlightRequestDto {
 
     private String destination;
 
-    private Double airFare;
-
+    private Double economyFare;
+    private Double businessFare;
+    private Double executiveFare;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate departureDate;
 

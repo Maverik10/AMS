@@ -1,6 +1,7 @@
 package com.Airline.management.service;
 
 import com.Airline.management.dto.FlightRequestDto;
+import com.Airline.management.dto.SearchFlightResponseDto;
 import com.Airline.management.model.Flight;
 
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ public interface FlightService {
 
     Flight updateFlight(Long id, Flight flight);
 
-    List<Flight> searchFlights(
+    List<SearchFlightResponseDto> searchFlights(
             String origin,
             String destination,
             LocalDate departureDate,

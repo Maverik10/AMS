@@ -30,4 +30,8 @@ public class Booking {
     private String status;
 
     private Double fare;
+
+
+    @Column(nullable = false, columnDefinition = "int default 1")
+    private int noOfSeatsBooked = 1;
 }
