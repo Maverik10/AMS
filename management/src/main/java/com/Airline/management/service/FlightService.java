@@ -28,4 +28,5 @@ public interface FlightService {
     Flight getFlightById(Long flightId);
 
     void deleteFlight(Long flightId);
+    long getActiveFlightCount();
 }

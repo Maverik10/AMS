@@ -175,4 +175,8 @@ public class FlightServiceImpl implements FlightService {
 
         repository.delete(flight);
     }
+    @Override
+    public long getActiveFlightCount() {
+    return repository.count();
+}
 }
