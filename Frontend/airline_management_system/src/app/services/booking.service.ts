@@ -39,6 +39,16 @@ export class BookingService {
     );
   }
 
+  createBooking(
+  booking: any
+): Observable<Booking> {
+
+  return this.http.post<Booking>(
+    this.baseUrl,
+    booking
+  );
+}
+
   getCompletedBookings(
     passengerId: number
   ): Observable<Booking[]> {

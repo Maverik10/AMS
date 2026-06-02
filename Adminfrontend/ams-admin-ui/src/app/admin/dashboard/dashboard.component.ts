@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -24,8 +24,9 @@ export class DashboardComponent implements OnInit {
   carriersCount = 0;
 
   constructor(
-    private service: AdminService
-  ) {
+  private service: AdminService,
+  private router: Router
+){
 
     const hour = new Date().getHours();
 
@@ -99,19 +100,10 @@ loadFlightsCount() {
     );
   }
 
-  logout() {
+logout() {
 
-    const confirmation = confirm(
-      'Are you sure you want to logout?'
-    );
+  localStorage.removeItem('loggedIn');
 
-    if (confirmation) {
-
-      localStorage.removeItem(
-        'loggedIn'
-      );
-
-      window.location.href = '/';
-    }
-  }
+  this.router.navigate(['/']);
+}
 }

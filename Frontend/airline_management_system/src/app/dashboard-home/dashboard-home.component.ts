@@ -3,6 +3,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { BookingService } from '../services/booking.service';
+
 
 @Component({
   selector: 'app-dashboard-home',
@@ -41,12 +43,20 @@ export class DashboardHomeComponent implements OnInit {
 
   flights: Flight[] = [];
   filteredFlights: Flight[] = [];
+  showBookingModal = false;
+
+showSuccessModal = false;
+
+selectedFlight: any = null;
+
+redirectCountdown = 3;
 
   constructor(
-    private router: Router,
-    private flightService: FlightService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  private router: Router,
+  private flightService: FlightService,
+  private bookingService: BookingService,
+  @Inject(PLATFORM_ID) private platformId: Object
+) {}
 
   ngOnInit(): void {
 
@@ -91,7 +101,17 @@ export class DashboardHomeComponent implements OnInit {
       }
     });
   }
+  openBookingModal(flight: any): void {
 
+  this.selectedFlight = flight;
+
+  this.showBookingModal = true;
+}closeBookingModal(): void {
+
+  this.showBookingModal = false;
+
+  this.selectedFlight = null;
+}
   searchFlights(): void {
 
     this.errorMessage = '';
@@ -239,65 +259,177 @@ getAvailableSeats(flight: any): number {
 
 //     alert('Flight booked ✅');
 //   }
+// bookFlight(flight: any): void {
 
-bookFlight(flight: any) {
+//   const confirmBooking = confirm(
+//     `Confirm booking for ${flight.carrierName}?`
+//   );
 
-  const passengerData = localStorage.getItem('loggedInUser'); 
+//   if (!confirmBooking) {
+//     return;
+//   }
+
+//   const passengerData =
+//     localStorage.getItem('loggedInPassenger');
+
+//   if (!passengerData) {
+//     alert('Please login again');
+//     return;
+//   }
+
+//   const passenger =
+//     JSON.parse(passengerData);
+
+//   const requestBody = {
+
+//     passengerId:
+//       passenger.passengerId,
+
+//     flightId:
+//       flight.flightId,
+
+//     travelClass:
+//       this.search.travelClass,
+
+//     journeyDate:
+//       this.convertToMMDDYYYY(
+//         this.search.departure
+//       ),
+
+//     status:
+//       'UPCOMING',
+
+//     fare:
+//       flight.airFare,
+
+//     noOfSeatsBooked:
+//       this.search.travellers
+//   };
+
+//   console.log('Booking Request:', requestBody);
+
+//   this.flightService
+//     .bookFlight(requestBody)
+//     .subscribe({
+
+//       next: () => {
+
+//         alert(
+//           'Payment received ✅\nTicket booked successfully!'
+//         );
+
+//         this.router.navigate(['/trips/upcoming']);
+//       },
+
+//       error: (err) => {
+
+//         console.error(err);
+
+//         alert('Booking failed ❌');
+//       }
+
+//     });
+// }
+
+bookFlight(): void {
+
+  if (!this.selectedFlight) {
+    return;
+  }
+
+  const passengerData =
+    localStorage.getItem('loggedInPassenger');
 
   if (!passengerData) {
     alert('Please login again');
     return;
   }
 
-  if (!this.search.travelClass || !this.search.departure) {
-    alert("Please select travel class and departure date");
-    return;
-  }
-
-  const passenger = JSON.parse(passengerData);
-
-  console.log("Passenger:", passenger);
+  const passenger =
+    JSON.parse(passengerData);
 
   const requestBody = {
-    passengerId: passenger.passengerId || passenger.id,
-    flightId: flight.flightId,
-    travelClass: this.search.travelClass,
-    journeyDate: this.search.departure,
-    fare: flight.airFare
+
+    passengerId:
+      passenger.passengerId,
+
+    flightId:
+      this.selectedFlight.flightId,
+
+    travelClass:
+      this.search.travelClass,
+
+    journeyDate:
+      this.convertToMMDDYYYY(
+        this.search.departure
+      ),
+
+    status:
+      'UPCOMING',
+
+    fare:
+      this.selectedFlight.airFare,
+
+    noOfSeatsBooked:
+      this.search.travellers
   };
 
-  console.log("Request Body:", requestBody);
+  this.flightService
+    .bookFlight(requestBody)
+    .subscribe({
 
-  this.flightService.bookFlight(requestBody).subscribe({
-    next: (response) => {
+      next: () => {
 
-      alert('Flight booked successfully ✅');
+        this.showBookingModal = false;
 
-      let bookedTrips = JSON.parse(localStorage.getItem('bookedTrips') || '[]');
+        this.showSuccessModal = true;
 
-      const bookedData = {
-  passengerId: passenger.passengerId || passenger.id,
-  flightId: flight.flightId,
-  flightName: flight.carrierName,
-  origin: flight.origin,
-  destination: flight.destination,
-  travelClass: this.search.travelClass,
-  journeyDate: this.search.departure,
-  fare: flight.airFare
-};
+        this.redirectCountdown = 3;
 
+        const timer = setInterval(() => {
 
-      bookedTrips.push(bookedData);
-      localStorage.setItem('bookedTrips', JSON.stringify(bookedTrips));
-    },
+          this.redirectCountdown--;
 
-    error: (err) => {
-      console.error("Booking Error:", err);
-      alert('Booking failed ❌');
-    }
-  });
+          if (this.redirectCountdown === 0) {
+
+            clearInterval(timer);
+
+            this.router.navigate(
+              ['trips/upcoming']
+            );
+          }
+
+        }, 1000);
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+        alert('Booking failed ❌');
+      }
+
+    });
 }
+private convertToMMDDYYYY(
+  dateString: string
+): string {
 
+  const date = new Date(dateString);
+
+  const month =
+    String(date.getMonth() + 1)
+      .padStart(2, '0');
+
+  const day =
+    String(date.getDate())
+      .padStart(2, '0');
+
+  const year =
+    date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+}
 
 }
 

@@ -8,16 +8,23 @@ export interface Flight {
   carrierName: string;
   origin: string;
   destination: string;
-  airFare: number;
   departureDate: string;
 
-  seatCapacityBusiness: number;
-  seatCapacityEconomy: number;
-  seatCapacityExecutive: number;
+  // existing backend flight fields
+  airFare?: number;
 
-  leftSeatCapacityBusiness: number;
-  leftSeatCapacityEconomy: number;
-  leftSeatCapacityExecutive: number;
+  seatCapacityBusiness?: number;
+  seatCapacityEconomy?: number;
+  seatCapacityExecutive?: number;
+
+  leftSeatCapacityBusiness?: number;
+  leftSeatCapacityEconomy?: number;
+  leftSeatCapacityExecutive?: number;
+
+  // search API DTO fields
+  fare?: number;
+  availableSeats?: number;
+  travelClass?: string;
 }
 
 @Injectable({

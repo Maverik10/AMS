@@ -731,3 +731,168 @@ h2 {
 .seat-icon {
   font-size: 1rem;
 }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+.booking-modal,
+.success-modal {
+
+  width: 420px;
+
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(40,45,60,.95),
+      rgba(20,24,38,.98)
+    );
+
+  border: 1px solid rgba(0,255,170,.15);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.5);
+
+  text-align: center;
+
+  animation: popup .25s ease;
+}
+
+.modal-icon,
+.success-icon {
+
+  width: 72px;
+  height: 72px;
+
+  margin: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  font-size: 32px;
+}
+
+.modal-icon {
+  background: rgba(255,165,0,.15);
+}
+
+.success-icon {
+  background: rgba(0,255,120,.15);
+  color: #36ff8b;
+}
+
+.booking-modal h2,
+.success-modal h2 {
+
+  color: white;
+
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+.booking-modal p,
+.success-modal p {
+
+  color: #bfc7d6;
+
+  line-height: 1.6;
+}
+
+.modal-price {
+
+  margin: 24px 0;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  color: #3cff9c;
+}
+
+.modal-actions {
+
+  margin-top: 24px;
+
+  display: flex;
+  gap: 12px;
+}
+
+.cancel-btn,
+.confirm-btn {
+
+  flex: 1;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.cancel-btn {
+
+  background: rgba(255,255,255,.08);
+
+  color: white;
+}
+
+.cancel-btn:hover {
+
+  background: rgba(255,255,255,.15);
+}
+
+.confirm-btn {
+
+  background:
+    linear-gradient(
+      135deg,
+      #00d47e,
+      #00ff9d
+    );
+
+  color: black;
+}
+
+.confirm-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(0,255,153,.35);
+}
+
+@keyframes popup {
+
+  from {
+    opacity: 0;
+    transform: scale(.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
