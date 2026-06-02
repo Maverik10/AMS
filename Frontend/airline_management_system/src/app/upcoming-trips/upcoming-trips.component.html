@@ -97,6 +97,9 @@
   <main class="dashboard-card">
 
     <div class="page-header">
+      <div class="booking-count">
+        {{ trips.length }} Upcoming
+      </div>
       <div>
         <p class="top-badge">Upcoming Travel</p>
         <h1>Upcoming Trips</h1>
@@ -126,16 +129,17 @@
         <div class="ticket-glow"></div>
 
         <div class="card-header">
-          <span class="trip-status upcoming">
-            Scheduled
-          </span>
+  <span class="trip-status upcoming">
+    Scheduled
+  </span>
 
-          <span class="flight-id">
-            #{{ trip.flightId || 'N/A' }}
-          </span>
-        </div>
+  <div class="id-section">
+    <div>Booking #{{ trip.bookingId }}</div>
+    <div>Flight #{{ trip.flightId }}</div>
+  </div>
+</div>
 
-        <div class="airline-row">
+<div class="airline-row">
           <div class="plane-icon">✈</div>
 
           <div>
@@ -144,6 +148,9 @@
             </h3>
             <p class="route">
               {{ trip.origin || 'Origin' }} → {{ trip.destination || 'Destination' }}
+            </p>
+            <p class="days-left">
+              {{ getDaysLeft(trip.journeyDate) }} days remaining
             </p>
           </div>
         </div>
@@ -167,10 +174,10 @@
             <strong>{{ trip.travelClass || 'Not Selected' }}</strong>
           </div>
 
-          <div class="info-box">
-            <span>Passenger ID</span>
-            <strong>{{ trip.passengerId || 'N/A' }}</strong>
-          </div>
+         <div class="info-box">
+          <span>Seats Booked</span>
+          <strong>{{ trip.noOfSeatsBooked }}</strong>
+         </div>
 
         </div>
 
