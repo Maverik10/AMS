@@ -1,5 +1,5 @@
 package com.Airline.management.service.impl;
-
+import com.Airline.management.dto.SearchFlightResponseDto;
 import com.Airline.management.dto.FlightRequestDto;
 import com.Airline.management.model.Flight;
 import com.Airline.management.repository.FlightRepository;
@@ -26,7 +26,9 @@ public class FlightServiceImpl implements FlightService {
         flight.setCarrierName(request.getCarrierName());
         flight.setOrigin(request.getOrigin());
         flight.setDestination(request.getDestination());
-        flight.setAirFare(request.getAirFare());
+        flight.setEconomyFare(request.getEconomyFare());
+        flight.setBusinessFare(request.getBusinessFare());
+        flight.setExecutiveFare(request.getExecutiveFare());
         flight.setDepartureDate(request.getDepartureDate());
 
         flight.setSeatCapacityBusiness(request.getSeatCapacityBusiness());
@@ -59,7 +61,6 @@ public class FlightServiceImpl implements FlightService {
         existing.setCarrierName(flight.getCarrierName());
         existing.setOrigin(flight.getOrigin());
         existing.setDestination(flight.getDestination());
-        existing.setAirFare(flight.getAirFare());
         existing.setDepartureDate(flight.getDepartureDate());
         existing.setSeatCapacityBusiness(flight.getSeatCapacityBusiness());
         existing.setSeatCapacityEconomy(flight.getSeatCapacityEconomy());
@@ -69,23 +70,66 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> searchFlights(
-            String origin,
-            String destination,
-            LocalDate date,
-            Integer noOfTravellers,
-            String travelClass
-    ) {
-        List<Flight> flights = repository.findByOriginIgnoreCaseAndDestinationIgnoreCaseAndDepartureDate(
-                origin,
-                destination,
-                date
-        );
+    public List<SearchFlightResponseDto> searchFlights(
+        String origin,
+        String destination,
+        LocalDate date,
+        Integer noOfTravellers,
+        String travelClass
+        ) {
 
-        return flights.stream()
-                .filter(flight -> hasAvailableSeats(flight, travelClass, noOfTravellers))
-                .toList();
-    }
+    List<Flight> flights =
+            repository.findByOriginIgnoreCaseAndDestinationIgnoreCaseAndDepartureDate(
+                    origin,
+                    destination,
+                    date
+            );
+
+    return flights.stream()
+            .filter(flight ->
+                    hasAvailableSeats(
+                            flight,
+                            travelClass,
+                            noOfTravellers))
+            .map(flight -> {
+
+                Double fare;
+                Integer seats;
+
+                switch (travelClass.toUpperCase()) {
+
+                    case "BUSINESS":
+                        fare = flight.getBusinessFare();
+                        seats = flight.getLeftSeatCapacityBusiness();
+                        break;
+
+                    case "EXECUTIVE":
+                        fare = flight.getExecutiveFare();
+                        seats = flight.getLeftSeatCapacityExecutive();
+                        break;
+
+                    default:
+                        fare = flight.getEconomyFare();
+                        seats = flight.getLeftSeatCapacityEconomy();
+                }
+
+                SearchFlightResponseDto dto =
+                        new SearchFlightResponseDto();
+
+                dto.setFlightId(flight.getFlightId());
+                dto.setCarrierName(flight.getCarrierName());
+                dto.setOrigin(flight.getOrigin());
+                dto.setDestination(flight.getDestination());
+                dto.setDepartureDate(flight.getDepartureDate());
+
+                dto.setTravelClass(travelClass);
+                dto.setFare(fare);
+                dto.setAvailableSeats(seats);
+
+                return dto;
+            })
+            .toList();
+}
 
 
     private boolean hasAvailableSeats(

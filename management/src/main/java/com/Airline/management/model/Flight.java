@@ -22,7 +22,9 @@ public class Flight {
     private String origin;
     private String destination;
 
-    private Double airFare;
+    private Double economyFare;
+    private Double businessFare;
+    private Double executiveFare;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name="departure_date")
