@@ -28,4 +28,6 @@ public interface FlightService {
     Flight cancelFlight(Long flightId);
 
     void completePastFlights();
+    // void deleteFlight(Long flightId);
+    long getActiveFlightCount();
 }

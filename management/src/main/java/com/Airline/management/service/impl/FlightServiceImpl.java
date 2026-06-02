@@ -206,4 +206,8 @@ public class FlightServiceImpl implements FlightService {
 
         repository.saveAll(pastFlights);
     }
+    @Override
+    public long getActiveFlightCount() {
+    return repository.count();
+}
 }

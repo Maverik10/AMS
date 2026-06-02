@@ -4,6 +4,7 @@ import com.Airline.management.dto.FlightRequestDto;
 import com.Airline.management.dto.SearchFlightResponseDto;
 import com.Airline.management.model.Flight;
 import com.Airline.management.service.FlightService;
+import com.Airline.management.dto.FlightCountDto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +62,12 @@ public class FlightController {
             @PathVariable Long flightId) {
 
         return service.cancelFlight(flightId);
+    }
+    @GetMapping("/count")
+    public FlightCountDto getActiveFlightCount() {
+
+        return new FlightCountDto(
+                service.getActiveFlightCount()
+        );
     }
 }

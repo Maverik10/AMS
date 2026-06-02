@@ -25,6 +25,10 @@ export class ViewFlightsComponent implements OnInit {
 
   flights:any[] = [];
 
+  showDeletePopup = false;
+
+  selectedFlightId:number = 0;
+
   constructor(
     private service: AdminService
   ) {}
@@ -50,4 +54,42 @@ export class ViewFlightsComponent implements OnInit {
         }
       });
   }
+
+  openDeletePopup(id:number){
+
+    this.selectedFlightId = id;
+
+    this.showDeletePopup = true;
+  }
+
+  closePopup(){
+
+    this.showDeletePopup = false;
+  }
+
+  confirmDelete(){
+
+    this.service.deleteFlight(this.selectedFlightId)
+      .subscribe({
+
+        next: () => {
+
+          this.flights =
+            this.flights.filter(
+              flight =>
+                flight.flightId !== this.selectedFlightId
+            );
+
+          this.showDeletePopup = false;
+
+          alert('Flight cancelled successfully');
+        },
+
+        error: () => {
+
+          alert('Unable to delete flight');
+        }
+      });
+  }
+
 }
