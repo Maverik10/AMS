@@ -1,5 +1,6 @@
 package com.Airline.management.service.impl;
 
+import com.Airline.management.dto.BookingCountDto;
 import com.Airline.management.model.Booking;
 import com.Airline.management.model.Flight;
 import com.Airline.management.repository.BookingRepository;
@@ -67,6 +68,30 @@ public class BookingServiceImpl implements BookingService {
         booking.setStatus("COMPLETED");
 
         return bookingRepository.save(booking);
+    }
+
+    @Override
+    public List<Booking> getUpcomingBookings(Long passengerId) {
+        return bookingRepository.findByPassengerIdAndStatus(passengerId, "UPCOMING");
+    }
+
+    @Override
+    public List<Booking> getCancelledBookings(Long passengerId) {
+        return bookingRepository.findByPassengerIdAndStatus(passengerId, "CANCELLED");
+    }
+
+    @Override
+    public List<Booking> getCompletedBookings(Long passengerId) {
+        return bookingRepository.findByPassengerIdAndStatus(passengerId, "COMPLETED");
+    }
+
+    @Override
+    public BookingCountDto getBookingCounts(Long passengerId) {
+        long upcoming = bookingRepository.countByPassengerIdAndStatus(passengerId, "UPCOMING");
+        long cancelled = bookingRepository.countByPassengerIdAndStatus(passengerId, "CANCELLED");
+        long completed = bookingRepository.countByPassengerIdAndStatus(passengerId, "COMPLETED");
+
+        return new BookingCountDto(upcoming, cancelled, completed);
     }
 
     private void releaseSeats(Booking booking) {
